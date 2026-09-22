@@ -1,0 +1,488 @@
+<title>Perimenopause Product Case — Inito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F6F3; --panel:#FFFFFF; --panel-alt:#EDEFEA;
+  --ink:#121A17; --ink-soft:#4A524D; --ink-faint:#8B928C;
+  --line:#DCE0D9; --line-strong:#C2C8BE;
+  --teal:#0B6E5B; --teal-ink:#063D32; --teal-soft:#E1F0EA;
+  --coral:#C6493A; --coral-soft:#F9E4E0;
+  --amber:#A9772A; --amber-soft:#F4E9D3;
+  --violet:#5F51A0; --violet-soft:#EAE6F6;
+  --shadow:0 1px 2px rgba(18,26,23,.05), 0 12px 30px rgba(18,26,23,.07);
+  --radius:12px;
+  --serif:'Newsreader',Georgia,'Iowan Old Style',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1412; --panel:#151D19; --panel-alt:#1B241F;
+    --ink:#E9EDE9; --ink-soft:#B4BCB6; --ink-faint:#7C877F;
+    --line:#293029; --line-strong:#38423A;
+    --teal:#57D8B6; --teal-ink:#BFF0DD; --teal-soft:#163029;
+    --coral:#FF9484; --coral-soft:#3A241D;
+    --amber:#E7BE6E; --amber-soft:#3A2E17;
+    --violet:#BBABEA; --violet-soft:#2A2340;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1412; --panel:#151D19; --panel-alt:#1B241F;
+  --ink:#E9EDE9; --ink-soft:#B4BCB6; --ink-faint:#7C877F;
+  --line:#293029; --line-strong:#38423A;
+  --teal:#57D8B6; --teal-ink:#BFF0DD; --teal-soft:#163029;
+  --coral:#FF9484; --coral-soft:#3A241D;
+  --amber:#E7BE6E; --amber-soft:#3A2E17;
+  --violet:#BBABEA; --violet-soft:#2A2340;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62;}
+a{color:var(--teal);text-decoration:none;}
+a:hover{text-decoration:underline;}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;color:var(--ink);margin:0 0 .5em;}
+p{margin:0 0 1em;color:var(--ink-soft);}
+strong{color:var(--ink);}
+sup a{font-size:.72em;color:var(--teal);}
+
+header.topbar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);}
+.topbar-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:14px 24px;}
+.topbar .brand{flex:0 0 auto;font-family:var(--serif);font-weight:700;font-size:.98rem;color:var(--teal-ink);white-space:nowrap;}
+nav.toc{flex:1;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+nav.toc::-webkit-scrollbar{display:none;}
+nav.toc a{flex:0 0 auto;display:block;font-size:.74rem;font-weight:600;color:var(--ink-soft);padding:7px 10px;border-radius:7px;white-space:nowrap;}
+nav.toc a:hover{background:var(--teal-soft);color:var(--teal-ink);text-decoration:none;}
+nav.toc a.active{background:var(--teal-soft);color:var(--teal-ink);}
+@media (max-width:760px){.topbar-inner{padding:12px 16px;}}
+
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+main{padding-bottom:5rem;}
+@media (max-width:760px){.wrap{padding:0 16px;}}
+
+.hero{padding:52px 0 30px;border-bottom:1px solid var(--line);}
+.hero .eyebrow{margin-bottom:12px;}
+.hero h1{font-size:2.3rem;max-width:22ch;}
+.hero .sub{font-size:1.02rem;color:var(--ink-soft);max-width:66ch;}
+
+section.sec{padding:44px 0;border-bottom:1px solid var(--line);scroll-margin-top:72px;}
+section.sec h2{font-size:1.55rem;}
+.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);font-weight:700;margin-bottom:8px;}
+.lede{font-size:1rem;max-width:76ch;}
+.sublede{font-size:1.02rem;max-width:76ch;margin-bottom:1.4em;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media (max-width:760px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+.card h4{font-size:.95rem;color:var(--teal-ink);margin-bottom:.5em;}
+.card p{font-size:.92rem;}
+.pill{display:inline-block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:99px;margin:0 6px 6px 0;font-family:var(--mono);}
+.pill.teal{background:var(--teal-soft);color:var(--teal-ink);}
+.pill.coral{background:var(--coral-soft);color:var(--coral);}
+.pill.violet{background:var(--violet-soft);color:var(--violet);}
+.table-wrap{overflow-x:auto;margin:0 0 1.6em;}
+table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:460px;}
+caption{text-align:left;font-size:.76rem;color:var(--ink-faint);margin-bottom:.5em;caption-side:top;}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;}
+thead th{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700;border-bottom:2px solid var(--line-strong);}
+ul,ol{padding-left:1.2em;margin:0 0 1em;}
+li{margin-bottom:.4em;}
+.callout{border-left:3px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0;padding:16px 20px;margin:1.3em 0;font-size:.94rem;}
+.callout.warn{border-color:var(--coral);background:var(--coral-soft);}
+.callout .tag{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:6px;opacity:.85;}
+figure{margin:1.4em 0 1.8em;}
+figure svg{width:100%;height:auto;display:block;}
+figcaption{font-size:.82rem;color:var(--ink-faint);margin-top:8px;max-width:70ch;}
+.node-text{font-family:var(--sans);font-weight:600;font-size:11.5px;}
+.persona{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;}
+.persona-avatar{flex:0 0 80px;width:80px;height:80px;border-radius:50%;background:var(--teal-soft);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--teal-ink);}
+.persona-body{flex:1;min-width:220px;}
+.persona-body .name{font-family:var(--serif);font-size:1.2rem;font-weight:600;}
+.wf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media (max-width:760px){.wf-grid{grid-template-columns:1fr;}}
+.wf-card{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--panel);}
+.wf-card h4{font-size:.86rem;color:var(--teal-ink);margin-bottom:.5em;}
+.wf-card .goal{font-size:.8rem;color:var(--ink-faint);}
+.pos-line{font-family:var(--serif);font-size:1.3rem;font-style:italic;color:var(--teal-ink);margin:.4em 0;}
+#sources{padding:44px 0 70px;}
+#sources ol{padding-left:1.4em;}
+#sources li{font-size:.86rem;color:var(--ink-soft);margin-bottom:.7em;}
+#sources li a{word-break:break-word;}
+
+:root{ --chart-1:#0A8A6F; --chart-2:#5F51A0; --chart-3:#C6493A; }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --chart-1:#2FA383; --chart-2:#8A6FCB; --chart-3:#DD6B57; }
+}
+:root[data-theme="dark"]{ --chart-1:#2FA383; --chart-2:#8A6FCB; --chart-3:#DD6B57; }
+
+.chart-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px 18px;box-shadow:var(--shadow);margin:1.5em 0;}
+.chart-card h4{font-size:.94rem;color:var(--ink);margin-bottom:2px;font-family:var(--sans);font-weight:700;}
+.chart-card .chart-sub{font-size:.78rem;color:var(--ink-faint);margin-bottom:6px;max-width:68ch;}
+.chart-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;font-size:.76rem;color:var(--ink-soft);}
+.chart-legend .lg-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+.chart-foot{font-size:.74rem;color:var(--ink-faint);margin-top:10px;max-width:70ch;}
+.hchart-label{font-family:var(--sans);font-size:12px;font-weight:700;}
+.hchart-axis{font-family:var(--sans);font-size:10.5px;fill:var(--ink-faint);}
+
+.fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 1.6em;}
+@media (max-width:760px){.fact-grid{grid-template-columns:1fr;}}
+.fact-card{border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px 13px;background:var(--panel-alt);}
+.fact-card .fnum{font-family:var(--mono);font-size:.66rem;font-weight:700;color:var(--teal);letter-spacing:.06em;margin-bottom:7px;display:block;text-transform:uppercase;}
+.fact-card h5{margin:0 0 4px;font-size:.86rem;font-weight:600;color:var(--ink);font-family:var(--sans);}
+.fact-card p{margin:0;font-size:.79rem;color:var(--ink-soft);line-height:1.5;}
+
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.bar-row .lbl{flex:0 0 172px;font-size:.8rem;color:var(--ink);font-weight:600;}
+.bar-row .track{flex:1;background:var(--panel-alt);border-radius:6px;height:18px;overflow:hidden;}
+.bar-row .fill{height:100%;border-radius:6px;background:var(--chart-1);cursor:default;}
+.bar-row .fill:hover{opacity:.8;}
+.bar-row .val{flex:0 0 48px;font-size:.78rem;font-weight:700;color:var(--ink);text-align:right;font-family:var(--mono);}
+@media (max-width:760px){.bar-row .lbl{flex-basis:118px;font-size:.72rem;}}
+
+.status-pill{display:inline-block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 10px;border-radius:99px;white-space:nowrap;}
+.status-pill.selected{background:var(--teal);color:#fff;}
+.status-pill.no{background:var(--panel-alt);color:var(--ink-faint);}
+tr.row-selected td{background:var(--teal-soft);}
+tr.row-selected td:first-child{border-left:3px solid var(--teal);}
+</style>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Perimenopause Product Case</div>
+    <nav class="toc">
+      <a href="#decision">1. Decision</a>
+      <a href="#user">2. User</a>
+      <a href="#feature">3. Feature</a>
+      <a href="#symptoms">4. Symptoms</a>
+      <a href="#mechanism">5. Mechanism</a>
+      <a href="#causation">6. Causation</a>
+      <a href="#behavior">7. Behavior</a>
+      <a href="#metrics">8. Metrics</a>
+      <a href="#wireframes">9. Wireframes</a>
+      <a href="#assumptions">10. Assumptions</a>
+      <a href="#sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Hormone Insights &amp; Personalisation</div>
+  <h1>Should Inito build a perimenopause product?</h1>
+</header>
+
+<section class="sec" id="decision">
+  <div class="eyebrow">1</div>
+  <h2>The business opportunity</h2>
+  <p class="lede">The menopause-related market is projected to reach roughly $24.35B by 2030 (5.4% CAGR).<sup><a href="#src14">[14]</a></sup> One widely cited estimate puts the broader femtech category near $97B by 2030.<sup><a href="#src15">[15]</a></sup> More informative than total size is where competing capital has gone:</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Category</th><th>Players</th><th>Strong at</th><th>Can't do</th></tr></thead>
+    <tbody>
+      <tr><td>HRT telehealth &amp; prescribing</td><td>Midi Health<sup><a href="#src5">[5]</a></sup>, Evernow<sup><a href="#src6">[6]</a></sup>, Alloy<sup><a href="#src7">[7]</a></sup>, Winona<sup><a href="#src8">[8]</a></sup></td><td>Care delivery, prescribing</td><td>Frequent, objective measurement</td></tr>
+      <tr><td>One-time test kits</td><td>Hertility Health<sup><a href="#src9">[9]</a></sup>, myLabBox<sup><a href="#src10">[10]</a></sup></td><td>A single lab-grade snapshot</td><td>Showing a fluctuating, multi-week process</td></tr>
+      <tr><td>Wearables</td><td>Apple Watch, Whoop</td><td>Passive, always-on</td><td>Measuring hormones directly</td></tr>
+      <tr><td>Symptom trackers</td><td>Flo<sup><a href="#src12">[12]</a></sup>, Balance<sup><a href="#src13">[13]</a></sup></td><td>Capturing what she feels</td><td>An objective anchor for why</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="lede">No player currently combines frequent, direct, affordable hormone measurement with personalised interpretation over time. That gap &mdash; not the size of the market &mdash; is the argument for a perimenopause product specifically.</p>
+
+  <div class="callout warn">
+    <span class="tag">The one open technical question</span>
+    Our assay and reader calibration were built and validated for reproductive-age cycling hormone levels, to confirm ovulation. Perimenopause produces excursions outside that range &mdash; sharply elevated, erratic FSH during anovulatory cycles; unpredictable estrogen spikes and crashes. Whether the existing assay is accurate across that wider range, or whether this product is gated on new antibody development, is genuinely unresolved. Working assumption for the rest of this document: adequate but not optimal &mdash; good enough to validate the product now, improving as we iterate on the go. If that's wrong, the design still holds; only the timeline moves.
+  </div>
+</section>
+
+<section class="sec" id="user">
+  <div class="eyebrow">2</div>
+  <h2>User type</h2>
+  <div class="card persona" style="margin-bottom:20px;">
+    <div class="persona-avatar">U</div>
+    <div class="persona-body">
+      <div class="name">"The Unexplained"</div>
+      <p style="margin-bottom:0;">Early-to-mid perimenopause, still cycling but irregularly. Multiple disruptive symptoms &mdash; sleep, mood, hot flashes, cycle chaos. Has seen a doctor once or not at all; if she has, got an ambiguous or "normal" single-test result, because one visit can't catch a fluctuating process. Most plausibly sourced from our own trying-to-conceive (TTC) previous base who has aged in &mdash; near-zero incremental acquisition cost, and she already trusts our hormone claims from her fertility journey.</p>
+    </div>
+  </div>
+  <p class="lede"><strong>Not targeted first:</strong> women whose job-to-be-done is pure symptom relief &mdash; a pharmacology problem HRT telehealth already serves better &mdash; and late/post-menopausal women, whose flattened hormones leave little week-to-week signal for the core mechanic to work with.</p>
+</section>
+
+<section class="sec" id="feature">
+  <div class="eyebrow">3</div>
+  <h2>First feature / experience</h2>
+  <p class="lede">The smallest thing that can turn "I don't know if this is hormonal" into "here's what I've learned about my own body": <strong>measure &rarr; log &rarr; build a personal baseline &rarr; surface a confidence-scored insight &rarr; suggest one concrete action.</strong> Internally, the Pattern Journal.</p>
+
+  <figure>
+    <svg viewBox="0 0 790 175" role="img" aria-label="A five-step workflow: measure, log, build baseline, surface insight, suggest one action — looping back to measure again each cycle.">
+      <defs>
+        <marker id="arrLoop" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker>
+        <marker id="arrRow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="currentColor"/></marker>
+      </defs>
+      <path d="M705,70 C705,15 85,15 85,70" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrLoop)"/>
+      <g fill="none" stroke="currentColor" stroke-width="2" color="var(--ink-faint)">
+        <line x1="150" y1="100" x2="175" y2="100" marker-end="url(#arrRow)"/>
+        <line x1="305" y1="100" x2="330" y2="100" marker-end="url(#arrRow)"/>
+        <line x1="460" y1="100" x2="485" y2="100" marker-end="url(#arrRow)"/>
+        <line x1="615" y1="100" x2="640" y2="100" marker-end="url(#arrRow)"/>
+      </g>
+      <g><rect x="20" y="70" width="130" height="60" rx="9" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"/><text x="85" y="96" text-anchor="middle" class="node-text" fill="var(--teal-ink)">Measure</text><text x="85" y="112" text-anchor="middle" class="node-text" fill="var(--teal-ink)" font-weight="400">existing hardware</text></g>
+      <g><rect x="175" y="70" width="130" height="60" rx="9" fill="var(--panel-alt)" stroke="var(--line-strong)" stroke-width="1.3"/><text x="240" y="96" text-anchor="middle" class="node-text" fill="var(--ink)">Log</text><text x="240" y="112" text-anchor="middle" class="node-text" fill="var(--ink)" font-weight="400">symptoms &amp; context</text></g>
+      <g><rect x="330" y="70" width="130" height="60" rx="9" fill="var(--panel-alt)" stroke="var(--line-strong)" stroke-width="1.3"/><text x="395" y="96" text-anchor="middle" class="node-text" fill="var(--ink)">Build</text><text x="395" y="112" text-anchor="middle" class="node-text" fill="var(--ink)" font-weight="400">personal baseline</text></g>
+      <g><rect x="485" y="70" width="130" height="60" rx="9" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.3"/><text x="550" y="90" text-anchor="middle" class="node-text" fill="var(--amber)">Surface</text><text x="550" y="105" text-anchor="middle" class="node-text" fill="var(--amber)" font-weight="400">confidence-scored</text><text x="550" y="118" text-anchor="middle" class="node-text" fill="var(--amber)" font-weight="400">insight</text></g>
+      <g><rect x="640" y="70" width="130" height="60" rx="9" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"/><text x="705" y="96" text-anchor="middle" class="node-text" fill="var(--teal-ink)">Suggest</text><text x="705" y="112" text-anchor="middle" class="node-text" fill="var(--teal-ink)" font-weight="400">one action</text></g>
+      <text x="395" y="158" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--ink-faint)">measure &rarr; log &rarr; baseline &rarr; insight &rarr; action &rarr; repeats every cycle</text>
+    </svg>
+    <figcaption>Same urine test strip and reader as the fertility product.</figcaption>
+  </figure>
+  <p class="lede"><strong>Not built in v1:</strong> a large hormone panel, HRT telehealth or prescribing, a community/content platform, or a live hormone dashboard. Each is a legitimate later direction; none is why we have the right to win on day one, and each adds regulatory, clinical, or content scope this case hasn't validated yet.</p>
+  <div class="callout"><span class="tag">Avenue to explore</span>Wearable integration (Apple Watch, Whoop) is a plausible v2 direction, not a v1 one. A wearable adds continuous, passive signal between test days &mdash; resting heart rate, skin temperature, sleep staging &mdash; which could tighten the estrogen-swing-to-symptom association the Pattern Journal already surfaces from hormone readings and self-reported logs. But it doesn't replace the hormone measurement: an elevated overnight temperature or a disrupted sleep stage looks the same whether the cause is a hormone shift, a fever, travel, or a bad night's sleep, and only the hormone reading disambiguates that. So the honest role for wearable data here is as another confounder input feeding the same confidence-scored model, not a new headline metric &mdash; worth revisiting once the core hormone-symptom association is validated on self-reported logs alone, not before.</div>
+</section>
+
+<section class="sec" id="symptoms">
+  <div class="eyebrow">4</div>
+  <h2>What's changing, and what she feels</h2>
+  <p class="lede">A multi-year transition &mdash; typically <strong>4&ndash;8 years</strong><sup><a href="#src20">[20]</a></sup> &mdash; driven by three hormones moving at once: estrogen swings erratically (often high before it's low) before eventually declining, progesterone softens early and then drops sharply once ovulation becomes infrequent, and FSH climbs as the ovary needs a louder signal to respond.</p>
+
+  <div class="chart-card">
+    <h4>Hormone trend across the transition</h4>
+    <div class="chart-sub">Schematic, relative to each hormone's own reproductive-age baseline &mdash; not a plot of lab units, which vary widely by woman and by day.<sup><a href="#src20">[20]</a></sup></div>
+    <figure style="margin:0;">
+      <svg viewBox="0 0 760 260" role="img" aria-label="Line chart across four life stages: estrogen holds near baseline or rises slightly, then swings erratically before declining; progesterone softens early and drops sharply once ovulation becomes infrequent; FSH rises steadily throughout.">
+        <line x1="40" y1="20" x2="40" y2="210" stroke="var(--line-strong)" stroke-width="1"/>
+        <line x1="40" y1="210" x2="620" y2="210" stroke="var(--line-strong)" stroke-width="1"/>
+        <text x="8" y="27" class="hchart-axis">Higher</text>
+        <text x="12" y="213" class="hchart-axis">Lower</text>
+
+        <polyline points="246,24.6 423,111 600,188.4" fill="none" stroke="var(--chart-1)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"/>
+
+        <polyline points="70,35 246,75 423,183 600,201" fill="none" stroke="var(--chart-3)" stroke-width="2.5"/>
+        <polyline points="70,183 246,147 423,75 600,30" fill="none" stroke="var(--chart-2)" stroke-width="2.5"/>
+        <polyline points="70,30 246,24.6 423,111 600,188.4" fill="none" stroke="var(--chart-1)" stroke-width="2.5"/>
+
+        <circle cx="70" cy="30" r="4.5" fill="var(--chart-1)" stroke="var(--panel)" stroke-width="2"><title>Estrogen, reproductive years: typical cycling levels</title></circle>
+        <circle cx="246" cy="24.6" r="4.5" fill="var(--chart-1)" stroke="var(--panel)" stroke-width="2"><title>Estrogen, early perimenopause: still cycling — often as high or higher than baseline, with rising variability (erratic FSH surges can over-stimulate follicles)</title></circle>
+        <circle cx="423" cy="111" r="4.5" fill="var(--chart-1)" stroke="var(--panel)" stroke-width="2"><title>Estrogen, late perimenopause: wide, erratic swings — the least predictable stretch</title></circle>
+        <circle cx="600" cy="188.4" r="4.5" fill="var(--chart-1)" stroke="var(--panel)" stroke-width="2"><title>Estrogen, postmenopause: consistently low</title></circle>
+
+        <circle cx="70" cy="183" r="4.5" fill="var(--chart-2)" stroke="var(--panel)" stroke-width="2"><title>FSH, reproductive years: typical cycling range</title></circle>
+        <circle cx="246" cy="147" r="4.5" fill="var(--chart-2)" stroke="var(--panel)" stroke-width="2"><title>FSH, early perimenopause: starting to climb</title></circle>
+        <circle cx="423" cy="75" r="4.5" fill="var(--chart-2)" stroke="var(--panel)" stroke-width="2"><title>FSH, late perimenopause: markedly elevated</title></circle>
+        <circle cx="600" cy="30" r="4.5" fill="var(--chart-2)" stroke="var(--panel)" stroke-width="2"><title>FSH, postmenopause: consistently high</title></circle>
+
+        <circle cx="70" cy="35" r="4.5" fill="var(--chart-3)" stroke="var(--panel)" stroke-width="2"><title>Progesterone, reproductive years: normal luteal-phase levels</title></circle>
+        <circle cx="246" cy="75" r="4.5" fill="var(--chart-3)" stroke="var(--panel)" stroke-width="2"><title>Progesterone, early perimenopause: softening as occasional cycles skip ovulation, but most cycles still ovulatory</title></circle>
+        <circle cx="423" cy="183" r="4.5" fill="var(--chart-3)" stroke="var(--panel)" stroke-width="2"><title>Progesterone, late perimenopause: low in most cycles as ovulation becomes the exception</title></circle>
+        <circle cx="600" cy="201" r="4.5" fill="var(--chart-3)" stroke="var(--panel)" stroke-width="2"><title>Progesterone, postmenopause: minimal</title></circle>
+
+        <text x="612" y="183" class="hchart-label" fill="var(--chart-1)">Estrogen</text>
+        <text x="612" y="34" class="hchart-label" fill="var(--chart-2)">FSH</text>
+        <text x="612" y="208" class="hchart-label" fill="var(--chart-3)">Progesterone</text>
+
+        <text x="70" y="232" text-anchor="middle" class="hchart-axis">Reproductive years</text>
+        <text x="246" y="232" text-anchor="middle" class="hchart-axis">Early perimenopause</text>
+        <text x="423" y="232" text-anchor="middle" class="hchart-axis">Late perimenopause</text>
+        <text x="600" y="232" text-anchor="middle" class="hchart-axis">Postmenopause</text>
+      </svg>
+    </figure>
+    <div class="chart-foot">Individual timelines vary by years in either direction. Estrogen often holds steady or even rises before it swings and falls &mdash; a single low reading early on doesn't mean much. Those late-perimenopause swings are typically the least predictable part of the pattern &mdash; exactly why single-test snapshots struggle here.</div>
+  </div>
+
+  <div class="fact-grid">
+    <div class="fact-card"><span class="fnum">Cycle</span><h5>Ovulation turns inconsistent</h5><p>Cycles skip, shorten, then lengthen &mdash; often the first sign, sometimes years before any other symptom.</p></div>
+    <div class="fact-card"><span class="fnum">Brain</span><h5>The internal thermostat narrows</h5><p>Falling, fluctuating estrogen makes the hypothalamus overreact to small temperature changes &mdash; triggering a hot flash.</p></div>
+    <div class="fact-card"><span class="fnum">Sleep</span><h5>Deep sleep breaks apart</h5><p>Night sweats plus a drop in progesterone's calming metabolite (allopregnanolone) both interrupt deep sleep.</p></div>
+    <div class="fact-card"><span class="fnum">Mood</span><h5>A natural calming effect fades</h5><p>That same metabolite normally supports GABA, the brain's own sedative system &mdash; as it drops, irritability and anxiety become more likely.</p></div>
+    <div class="fact-card"><span class="fnum">Ovaries</span><h5>Egg supply is nearly spent</h5><p>Fewer follicles respond to FSH, so the pituitary raises FSH output &mdash; a rising number that mirrors a shrinking reserve.</p></div>
+    <div class="fact-card"><span class="fnum">Bone &amp; heart</span><h5>Longer-term risk starts quietly</h5><p>Estrogen's protective effect on bone density and cardiovascular risk begins fading years before it's noticed elsewhere.</p></div>
+  </div>
+
+  <div class="chart-card">
+    <h4>How common each symptom is</h4>
+    <div class="chart-sub">Commonly cited prevalence during the transition; ranges vary by study population &mdash; midpoints shown.<sup><a href="#src21">[21]</a></sup><sup><a href="#src22">[22]</a></sup><sup><a href="#src23">[23]</a></sup><sup><a href="#src24">[24]</a></sup></div>
+    <div class="bar-row"><div class="lbl">Irregular cycles</div><div class="track"><div class="fill" style="width:100%" title="~100% — the defining feature of the transition"></div></div><div class="val">100%</div></div>
+    <div class="bar-row"><div class="lbl">Hot flashes / night sweats</div><div class="track"><div class="fill" style="width:80%" title="Commonly cited at ~75–85% of women"></div></div><div class="val">~80%</div></div>
+    <div class="bar-row"><div class="lbl">Brain fog / concentration</div><div class="track"><div class="fill" style="width:60%" title="~60%, Seattle Midlife Women's Health Study"></div></div><div class="val">~60%</div></div>
+    <div class="bar-row"><div class="lbl">Sleep disruption</div><div class="track"><div class="fill" style="width:50%" title="~40–60%, SWAN Sleep Study"></div></div><div class="val">~50%</div></div>
+    <div class="bar-row"><div class="lbl">Joint / muscle aches</div><div class="track"><div class="fill" style="width:50%" title="~50%, cross-sectional survey data"></div></div><div class="val">~50%</div></div>
+    <div class="bar-row"><div class="lbl">Mood changes</div><div class="track"><div class="fill" style="width:45%" title="~40–50% report mood symptoms; depressive-episode risk roughly doubles vs. premenopause"></div></div><div class="val">~45%</div></div>
+    <div class="chart-foot">The two patterns below are prioritised for v1 not because they're the most common, but because they're the two Inito's current hormones (E2, PdG) can actually explain.</div>
+  </div>
+
+  <p class="lede">Chosen for mechanism strength, whether our <em>current</em> analytes capture them, and whether a lay user can understand the explanation without a physiology degree:</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Symptom / pattern</th><th>Status</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr class="row-selected"><td><strong>Estrogen variability &rarr; vasomotor symptoms &amp; sleep fragmentation</strong></td><td><span class="status-pill selected">Selected</span></td><td>Directly observable on the existing E2 readout; a hot flash or night sweat is unambiguous for a user to self-report.</td></tr>
+      <tr class="row-selected"><td><strong>Luteal progesterone (PdG) &rarr; mood &amp; sleep quality</strong></td><td><span class="status-pill selected">Selected</span></td><td>Plausible and partly established mechanistically, but individually emerging at the correlation level &mdash; discovered per-user, not asserted as a population rule. PdG is already computed today for ovulation confirmation, so no new measurement step is required.</td></tr>
+      <tr><td>Brain fog / concentration</td><td><span class="status-pill no">Not selected</span></td><td>Real, but the estrogen&ndash;cognition mechanism is too diffuse to operationalise into a clean per-user signal today.</td></tr>
+      <tr><td>Joint pain, weight / appetite</td><td><span class="status-pill no">Not selected</span></td><td>Heavily confounded by age, activity and diet independent of hormones.</td></tr>
+      <tr><td>Libido, vaginal symptoms (GSM)</td><td><span class="status-pill no">Not selected</span></td><td>Legitimate and underserved, better suited to a later version once trust in the core loop is established.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="sec" id="mechanism">
+  <div class="eyebrow">5</div>
+  <h2>The mechanism, not just correlation</h2>
+  <p class="lede"><strong>Estrogen &rarr; hot flashes, end to end:</strong> estrogen normally restrains kisspeptin/neurokinin-B/dynorphin (KNDy) neuron activity in the hypothalamus.<sup><a href="#src16">[16]</a></sup> As estrogen withdraws or swings erratically, KNDy neurons become hyperactive and narrow the body's thermoneutral zone, so small, normal core-temperature fluctuations trigger a full heat-dissipation response &mdash; flushing, sweating, vasodilation &mdash; which in turn fragments sleep. This pathway is well-characterised enough to underpin an FDA-approved non-hormonal drug for hot flashes (fezolinetant, an NK3-receptor antagonist).<sup><a href="#src17">[17]</a></sup></p>
+  <p class="lede"><strong>Progesterone &rarr; mood &amp; sleep, end to end:</strong> progesterone's metabolite allopregnanolone is a positive modulator of GABA-A receptors &mdash; the body's own calming/sedative system.<sup><a href="#src18">[18]</a></sup> As perimenopausal cycles become increasingly anovulatory or short-luteal, progesterone (and allopregnanolone) drops or becomes erratic, reducing that calming effect &mdash; plausibly producing irritability, anxiety, or lighter sleep. This pathway, too, is well-characterised enough to underpin an FDA-approved drug: zuranolone, a synthetic allopregnanolone analog and GABA-A modulator, was approved in 2023 as the first oral treatment for postpartum depression.<sup><a href="#src25">[25]</a></sup> That trial evidence is for postpartum depression, not perimenopausal mood change specifically, so the read-across here is inferred from a shared mechanism, not directly proven for this population &mdash; and individual sensitivity to the shift varies substantially, which is why the pattern must be discovered per user rather than asserted universally.</p>
+</section>
+
+<section class="sec" id="causation">
+  <div class="eyebrow">6</div>
+  <h2>Guarding against correlation vs. causation</h2>
+  <p class="sublede">An explicit evidence ladder governs what the product is allowed to say, and nothing higher than the evidence supports.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Level</th><th>Evidence</th><th>What the product may say</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Population science</td><td>"Research links estrogen changes to hot flashes in many women."</td></tr>
+      <tr><td>2</td><td>Biological plausibility</td><td>"There's a plausible reason lower progesterone could relate to sleep and mood."</td></tr>
+      <tr><td>3</td><td>User-specific association</td><td>"In your data, X and Y have occurred together N times." (requires &ge;3 cycles / ~8&ndash;10 weeks of data)</td></tr>
+      <tr><td>4</td><td>Temporal relationship</td><td>"Y tends to follow X within [a stated window]." (ordering, not causation)</td></tr>
+      <tr><td>5</td><td>Repeated within-person pattern</td><td>"This has repeated across N of your last M cycles &mdash; more than expected by chance at your own baseline." (our strongest safe claim)</td></tr>
+      <tr><td>6</td><td>Intervention-response</td><td>Not attempted in v1 &mdash; requires a controlled n-of-1 test.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Confounders to account for</h4><p style="margin-bottom:0;">Sleep debt, stress, diet, exercise, alcohol &middot; medication/HRT use &middot; illness, travel, life events &middot; measurement noise &middot; regression to the mean &middot; individual baseline differences.</p></div>
+    <div class="card"><h4>Language, by design</h4><p>Uses: may relate to &middot; has coincided with &middot; in your data &middot; not enough data yet</p><p style="margin-bottom:0;">Never: "this is causing&hellip;" &middot; "your hormones are the reason&hellip;" &middot; "you have [condition]" &middot; "this proves&hellip;"</p></div>
+  </div>
+</section>
+
+<section class="sec" id="behavior">
+  <div class="eyebrow">7</div>
+  <h2>Product behavior when patterns don't line up</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Situation</th><th>Behavior</th></tr></thead>
+    <tbody>
+      <tr><td>Pattern detected</td><td>Show the confidence-scored insight, sample size, and counter-evidence. Offer one concrete action.</td></tr>
+      <tr><td>Weak / early pattern</td><td>"Early signal, not enough data yet to be confident" &mdash; invites continued tracking rather than asserting or hiding it.</td></tr>
+      <tr><td>No pattern</td><td>"Your hot flashes don't appear to track closely with your estrogen readings so far &mdash; that's useful to know," then redirects to non-hormonal candidates.</td></tr>
+      <tr><td>Contradiction</td><td>Never let a number overrule lived experience: "Your readings didn't show the change we'd expect. That doesn't mean it isn't real."</td></tr>
+      <tr><td>Insufficient data</td><td>Explicit "still learning your baseline" for the first 4&ndash;6 weeks &mdash; never fabricates a pattern to seem useful early.</td></tr>
+      <tr><td>Potential red flag</td><td>Bypasses the pattern-confidence system entirely. Immediate, unhedged medical-escalation language.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="sec" id="metrics">
+  <div class="eyebrow">8</div>
+  <h2>Key metrics</h2>
+  <div class="callout">
+    <span class="tag">North Star &mdash; Monthly Insight Delivered (MID)</span>
+    The % of active users who, in a given month, receive at least one confidence-scored insight &mdash; including a confident "no clear pattern" &mdash; and mark it useful or take a logged action on it.
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Category</th><th>Metric</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Activation</td><td>% completing the 4&ndash;6 week baseline period</td><td>A prerequisite for any real insight</td></tr>
+      <tr><td>Engagement</td><td>Symptom-log &amp; measurement adherence vs. target cadence</td><td>Pattern quality depends on data completeness</td></tr>
+      <tr><td>Insight usefulness</td><td>Post-insight "this helped me understand something" rate</td><td>Direct proxy for the core value proposition</td></tr>
+      <tr><td>Action</td><td>% of insights followed by a logged action</td><td>An insight without action isn't value delivered yet</td></tr>
+      <tr><td>Retention</td><td>Month-3 and month-6 retention</td><td>A multi-year use case, unlike a bounded fertility arc</td></tr>
+      <tr><td>Monetisation</td><td>Free-to-paid conversion, subscription retention</td><td>Validates interpretation, not just measurement, is worth paying for</td></tr>
+      <tr><td>Safety guardrail</td><td>Medical-escalation sensitivity/specificity</td><td>The single highest-stakes metric in the tree</td></tr>
+      <tr><td>Trust guardrail</td><td>"False reassurance" &amp; "unnecessary anxiety" rate</td><td>Tests whether the causality framework works in the product</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.86rem;color:var(--ink-faint);">Deliberately excluded as vanity metrics: raw DAU/MAU, total hormone tests run, and count of "insights generated."</p>
+</section>
+
+<section class="sec" id="wireframes">
+  <div class="eyebrow">9</div>
+  <h2>Wireframes</h2>
+  <p class="lede">Nine screens &mdash; the minimum set that proves the product logic, not visual polish.</p>
+  <div class="wf-grid">
+    <div class="wf-card"><h4>1. Onboarding</h4><p class="goal">Route her correctly; screen out red flags and non-cycling users.</p></div>
+    <div class="wf-card"><h4>2. Daily check-in</h4><p class="goal">Capture symptoms in under 20 seconds &mdash; tap icons, no typing.</p></div>
+    <div class="wf-card"><h4>3. Measurement</h4><p class="goal">Same urine test strip &amp; reader as TTC, but once a week year-round instead of through a fertile window.</p></div>
+    <div class="wf-card"><h4>4. Weekly insight</h4><p class="goal">One idea per week, confidence tier always visible.</p></div>
+    <div class="wf-card"><h4>5. What this may mean</h4><p class="goal">Show the reasoning, including counter-evidence.</p></div>
+    <div class="wf-card"><h4>6. Symptom timeline</h4><p class="goal">Give her the months of memory a doctor visit needs.</p></div>
+    <div class="wf-card"><h4>7. No clear pattern</h4><p class="goal">Make "no pattern" feel useful, not a dead end.</p></div>
+    <div class="wf-card"><h4>8. What you can do</h4><p class="goal">Every insight ends with a concrete next step.</p></div>
+    <div class="wf-card"><h4>9. Doctor summary</h4><p class="goal">A 2-minute, evidence-based appointment opener.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="assumptions" style="border-bottom:none;">
+  <div class="eyebrow">10</div>
+  <h2>Assumptions &amp; open questions</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Assumption</th><th>If wrong, what breaks</th><th>Validate by</th></tr></thead>
+    <tbody>
+      <tr><td>Past TTC customers, now aged out of that use case, will accept a perimenopause offer</td><td>The distribution advantage disappears; cold-acquisition economics become the real Phase 1 question</td><td>Cohort analysis by age + small opt-in test</td></tr>
+      <tr><td>Current, active TTC customers will accept being offered a perimenopause product without it undermining trust in the fertility use case</td><td>Cross-selling confuses positioning; may need a separate brand/app surface rather than an in-app upsell</td><td>Message &amp; placement testing with active TTC users before any in-app prompt</td></tr>
+      <tr><td>The current assay's dynamic range is adequate to ship a credible v1</td><td>The interpretation layer is built on inaccurate inputs</td><td>Direct check with the assay/hardware team before any insight ships</td></tr>
+      <tr><td>A software subscription is viable despite the fertility product never needing one</td><td>Unit economics collapse to hardware/consumable margin alone</td><td>Price-sensitivity testing in a concierge pilot</td></tr>
+      <tr><td>HSA/FSA eligibility &amp; the existing FDA pathway extend to a "monitoring" claim</td><td>Pricing power and go-to-market both assume this</td><td>Direct regulatory and payer read before v1 ships</td></tr>
+      <tr><td>A once-a-week urine-sample cadence (down from TTC's fertile-window-only testing) is sustainable year-round</td><td>Adherence &mdash; and pattern quality &mdash; collapses by month six</td><td>Validate explicitly in the pilot</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="card"><h4>Open</h4><p style="margin-bottom:0;">Does the assay need re-validation, or new antibodies, before any perimenopause-range insight can be trusted?</p></div>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ol>
+    <li id="src1">Inito, "Inito Raises $29M &mdash; AI-Engineered Antibodies for Home Diagnostics," company blog, Dec 12, 2025. <a href="https://blog.inito.com/inito-raises-29m-ai-engineered-antibodies-home-diagnostics/" target="_blank" rel="noopener">blog.inito.com</a></li>
+    <li id="src2">TechCrunch, "Fertility startup Inito wants to use AI-designed antibodies to expand at-home health tests," Dec 10, 2025. <a href="https://techcrunch.com/2025/12/10/fertility-startup-inito-wants-to-use-ai-designed-antibodies-to-expand-at-home-health-tests/" target="_blank" rel="noopener">techcrunch.com</a></li>
+    <li id="src3">Inito, product &amp; pricing page. <a href="https://www.inito.com/buy-now" target="_blank" rel="noopener">inito.com/buy-now</a></li>
+    <li id="src4">Entrepreneur India, "In A First, Bengaluru's Inito Clears FDA Regulatory Pathway," Nov 2, 2020. <a href="https://india.entrepreneur.com/news-and-trends/in-a-first-bengalurus-inito-clears-fda-regulatory-pathway/358889" target="_blank" rel="noopener">india.entrepreneur.com</a></li>
+    <li id="src5">Midi Health, official site. <a href="https://www.joinmidi.com/" target="_blank" rel="noopener">joinmidi.com</a></li>
+    <li id="src6">Evernow, official site. <a href="https://www.evernow.com/" target="_blank" rel="noopener">evernow.com</a></li>
+    <li id="src7">Alloy, official site. <a href="https://www.myalloy.com/" target="_blank" rel="noopener">myalloy.com</a></li>
+    <li id="src8">Winona, official site. <a href="https://bywinona.com/" target="_blank" rel="noopener">bywinona.com</a></li>
+    <li id="src9">Hertility Health, official site. <a href="https://hertilityhealth.com/hormone-and-fertility-testing" target="_blank" rel="noopener">hertilityhealth.com</a></li>
+    <li id="src10">myLabBox, official site. <a href="https://www.mylabbox.com/" target="_blank" rel="noopener">mylabbox.com</a></li>
+    <li id="src12">Flo, official site. <a href="https://flo.health/" target="_blank" rel="noopener">flo.health</a></li>
+    <li id="src13">Balance (menopause app), official site. <a href="https://www.balance-menopause.com/balance-app/" target="_blank" rel="noopener">balance-menopause.com</a></li>
+    <li id="src14">Grand View Research, "Menopause Market Size, Share &amp; Trends Report." <a href="https://www.grandviewresearch.com/industry-analysis/menopause-market" target="_blank" rel="noopener">grandviewresearch.com</a></li>
+    <li id="src15">Grand View Research, "Femtech Market Size Worth $97.25 Billion By 2030," press release. <a href="https://www.grandviewresearch.com/press-release/global-femtech-market" target="_blank" rel="noopener">grandviewresearch.com</a></li>
+    <li id="src16">Rance NE, et al., "Modulation of body temperature and LH secretion by hypothalamic KNDy neurons: a novel hypothesis on the mechanism of hot flushes," Frontiers in Neuroendocrinology, 2013. <a href="https://pubmed.ncbi.nlm.nih.gov/23872331/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src17">U.S. FDA, "FDA Approves Novel Drug to Treat Moderate to Severe Hot Flashes Caused by Menopause," May 12, 2023. <a href="https://www.fda.gov/news-events/press-announcements/fda-approves-novel-drug-treat-moderate-severe-hot-flashes-caused-menopause" target="_blank" rel="noopener">fda.gov</a></li>
+    <li id="src18">Reddy DS, Mbilinyi RH, Estes E, "Preclinical and clinical pharmacology of brexanolone (allopregnanolone)," Psychopharmacology, 2023. <a href="https://pubmed.ncbi.nlm.nih.gov/37566239/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src20">Harlow SD, Gass M, Hall JE, et al., "Executive summary of the Stages of Reproductive Aging Workshop + 10 (STRAW+10)," Climacteric, 2012. <a href="https://pubmed.ncbi.nlm.nih.gov/22344196/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src21">The Menopause Society, "Hot Flashes," patient education page. <a href="https://menopause.org/patient-education/menopause-topics/hot-flashes" target="_blank" rel="noopener">menopause.org</a></li>
+    <li id="src22">Woods NF, Mitchell ES, "Symptoms during the perimenopause: prevalence, severity, trajectory, and significance in women's lives," American Journal of Medicine, 2005. <a href="https://pubmed.ncbi.nlm.nih.gov/16414323/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src23">Freeman EW, Sammel MD, Lin H, Nelson DB, "Associations of hormones and menopausal status with depressed mood in women with no history of depression," Archives of General Psychiatry, 2006. <a href="https://pubmed.ncbi.nlm.nih.gov/16585466/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src24">Kravitz HM, Zhao X, Bromberger JT, et al., "Sleep disturbance during the menopausal transition in a multi-ethnic community sample of women," Sleep, 2008. <a href="https://pubmed.ncbi.nlm.nih.gov/18652093/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src25">U.S. FDA / Biogen, "FDA Approves ZURZUVAE (zuranolone), the First and Only Oral Treatment Approved for Women with Postpartum Depression," press release, Aug 4, 2023. <a href="https://investors.biogen.com/news-releases/news-release-details/fda-approves-zurzuvaetm-zuranolone-first-and-only-oral-treatment" target="_blank" rel="noopener">investors.biogen.com</a></li>
+  </ol>
+</section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a[href^="#"]'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + 90;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    var idx = sections.indexOf(current);
+    if(idx > -1) links[idx].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>

@@ -1,0 +1,395 @@
+<title>Your body isn't random | Inito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-alt:#F4F2ED; --panel:#FFFFFF;
+  --ink:#1A1917; --ink-soft:#57534C; --ink-faint:#9A958C;
+  --line:#E7E3DA; --line-strong:#D2CCBF;
+  --black:#111110; --white:#FFFFFF;
+  --a1:#FA5627; --a2:#FF9C40;
+  --accent-grad:linear-gradient(100deg,var(--a1),var(--a2));
+  --accent-soft:#FFEEE4;
+  --violet:#9B5CE0; --violet-soft:#F1E7FC;
+  --blue:#3E7BE0; --blue-soft:#E5EDFC;
+  --pink:#E0568C; --pink-soft:#FCE6ED;
+  --green:#3F8F5F; --green-soft:#E4F3E9;
+  --shadow:0 2px 6px rgba(20,18,15,.06), 0 20px 50px rgba(20,18,15,.10);
+  --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C0C0B; --bg-alt:#151412; --panel:#181714;
+    --ink:#F3F1EC; --ink-soft:#C3BEB3; --ink-faint:#847F75;
+    --line:#2B2925; --line-strong:#3C3934;
+    --black:#000000; --white:#FFFFFF;
+    --accent-soft:#3A2013; --violet-soft:#241A33; --blue-soft:#182338; --pink-soft:#331A24; --green-soft:#16281D;
+    --shadow:0 2px 6px rgba(0,0,0,.4), 0 20px 50px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C0C0B; --bg-alt:#151412; --panel:#181714;
+  --ink:#F3F1EC; --ink-soft:#C3BEB3; --ink-faint:#847F75;
+  --line:#2B2925; --line-strong:#3C3934;
+  --black:#000000; --white:#FFFFFF;
+  --accent-soft:#3A2013; --violet-soft:#241A33; --blue-soft:#182338; --pink-soft:#331A24; --green-soft:#16281D;
+  --shadow:0 2px 6px rgba(0,0,0,.4), 0 20px 50px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);}
+.poster{max-width:900px;margin:0 auto;background:var(--bg);min-height:100vh;padding:0 0 60px;}
+.brand-row{display:flex;align-items:center;justify-content:space-between;padding:36px 56px 0;flex-wrap:wrap;gap:14px;}
+.wordmark{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;}
+.kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--a1);font-weight:700;}
+.brand-right{display:flex;align-items:center;gap:16px;}
+
+.tabswitch{display:flex;background:var(--bg-alt);padding:4px;border-radius:99px;gap:2px;}
+.tabswitch button{border:none;background:transparent;font-family:var(--sans);font-size:.8rem;font-weight:700;padding:8px 16px;border-radius:99px;cursor:pointer;color:var(--ink-soft);}
+.tabswitch button.on{background:var(--black);color:var(--white);}
+.ptab.hidden{display:none;}
+
+.hero{padding:30px 56px 0;position:relative;}
+.hero h1{font-size:3.2rem;font-weight:800;line-height:1.06;letter-spacing:-.02em;margin:0 0 14px;max-width:15ch;}
+.hero .accent{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero .subhead{font-size:1.08rem;color:var(--ink-soft);max-width:46ch;margin:0 0 20px;font-weight:500;}
+.hero .squiggle{display:block;max-width:340px;height:auto;margin-bottom:6px;}
+
+.problem{padding:6px 56px 0;}
+.problem .eyebrow2{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:700;margin-bottom:14px;}
+.problem .strike-row{display:flex;flex-wrap:wrap;gap:10px 14px;}
+.symptom-tag{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:600;color:var(--ink);padding:9px 14px 9px 10px;border-radius:99px;background:var(--bg-alt);border:1px solid var(--line);}
+.symptom-tag svg{flex:0 0 auto;width:16px;height:16px;stroke:var(--a1);}
+
+.control-banner{margin:34px 56px 0;padding:30px 32px;border-radius:22px;background:var(--bg-alt);border:1.5px solid var(--line-strong);border-left:5px solid var(--a1);}
+.control-banner h2{margin:0 0 8px;font-size:1.7rem;font-weight:800;letter-spacing:-.01em;max-width:22ch;color:var(--ink);}
+.control-banner p{margin:0;font-size:.98rem;color:var(--ink-soft);max-width:48ch;line-height:1.5;}
+
+.solution{padding:34px 56px 0;display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;}
+.solution .lead{flex:1;min-width:260px;}
+.solution .lead p{font-size:1.05rem;line-height:1.55;color:var(--ink-soft);max-width:52ch;margin:0;}
+
+.pill-row{display:flex;gap:14px;flex-wrap:wrap;padding:28px 56px 0;}
+.feat-pill{flex:1;min-width:190px;background:var(--bg-alt);border-radius:16px;padding:20px 20px 18px;}
+.feat-pill .icon-badge{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--a1);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.feat-pill .icon-badge svg{width:18px;height:18px;}
+.feat-pill h4{margin:0 0 6px;font-size:1.02rem;font-weight:700;}
+.feat-pill p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.45;}
+
+.mock{margin:36px 56px 0;background:var(--black);border-radius:22px;padding:26px 28px;color:var(--white);max-width:460px;}
+.mock .sup{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#FFB39B;font-weight:700;margin-bottom:10px;}
+.mock .conf{display:inline-block;font-size:.72rem;font-weight:800;padding:4px 12px;border-radius:99px;background:var(--accent-soft);color:var(--a1);margin-bottom:12px;}
+.mock .conf span{opacity:.75;font-weight:600;text-transform:none;}
+.mock .line{font-size:1.12rem;line-height:1.4;font-weight:600;margin:0;}
+
+.visual-strip{padding:34px 56px 0;}
+.visual-strip .cap{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:700;margin-bottom:14px;}
+.vs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.vs-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--panel);}
+.vs-card svg{width:100%;height:64px;display:block;margin-bottom:10px;}
+.vs-card .t{font-size:.84rem;font-weight:700;color:var(--ink);}
+.vs-card .d{font-size:.76rem;color:var(--ink-faint);margin-top:2px;}
+
+.taglinebar{margin:38px 56px 0;padding:22px 26px;border:1.5px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.taglinebar p{margin:0;font-size:.95rem;color:var(--ink-soft);max-width:52ch;}
+.taglinebar .cta{flex:0 0 auto;background:var(--accent-grad);color:var(--black);font-weight:700;font-size:.88rem;padding:11px 20px;border-radius:99px;white-space:nowrap;}
+
+.footfine{padding:30px 56px 0;font-size:.74rem;color:var(--ink-faint);border-top:1px solid var(--line);margin-top:34px;padding-top:20px;}
+
+.insights-wrap{padding:26px 56px 40px;}
+.insights-wrap .lead-p{font-size:1rem;color:var(--ink-soft);max-width:60ch;margin:0 0 22px;}
+.article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.article-card{border:1px solid var(--line);border-radius:16px;padding:20px 22px 18px;background:var(--panel);display:flex;flex-direction:column;gap:9px;}
+.article-card .icon-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
+.article-card .icon-badge svg{width:18px;height:18px;}
+.article-card .atag{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--a1);}
+.article-card h4{margin:0;font-size:1.02rem;font-weight:700;color:var(--ink);line-height:1.35;}
+.article-card p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.5;flex:1;}
+.article-card .meta{display:flex;justify-content:space-between;align-items:center;font-size:.74rem;color:var(--ink-faint);font-weight:600;margin-top:4px;padding-top:10px;border-top:1px solid var(--line);}
+.article-card .meta .read{color:var(--a1);font-weight:700;background:none;border:none;font-family:var(--sans);font-size:.74rem;cursor:pointer;padding:0;}
+.article-expand{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+.article-card.expanded .article-expand{display:block;}
+.article-expand p{font-size:.85rem;color:var(--ink-soft);line-height:1.55;margin:0 0 12px;}
+.fact-row{display:flex;flex-wrap:wrap;gap:7px;}
+.fact-chip{font-size:.7rem;font-weight:700;color:var(--ink);background:var(--bg-alt);border-radius:8px;padding:6px 10px;}
+
+.faq-wrap{padding:26px 56px 40px;}
+.faq-wrap .lead-p{font-size:1rem;color:var(--ink-soft);max-width:60ch;margin:0 0 18px;}
+.faq-item{border-bottom:1px solid var(--line);padding:16px 0;}
+.faq-item summary{cursor:pointer;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--ink);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:"+";font-size:1.5rem;font-weight:400;color:var(--a1);flex:0 0 auto;line-height:1;}
+.faq-item[open] summary::after{content:"\00d7";}
+.faq-item p{margin:12px 0 0;font-size:.9rem;color:var(--ink-soft);line-height:1.6;max-width:68ch;}
+
+@media (max-width:640px){
+  .brand-row,.hero,.problem,.solution,.pill-row,.mock,.taglinebar,.footfine,.control-banner,.visual-strip,.faq-wrap,.insights-wrap{padding-left:24px;padding-right:24px;}
+  .mock{margin-left:24px;margin-right:24px;}
+  .control-banner{margin-left:24px;margin-right:24px;}
+  .hero h1{font-size:2.4rem;}
+  .vs-grid{grid-template-columns:1fr;}
+  .article-grid{grid-template-columns:1fr;}
+}
+</style>
+
+<div class="poster">
+  <div class="brand-row">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="wordmark">inito</div>
+      <div class="kicker">Perimenopause</div>
+    </div>
+    <div class="tabswitch">
+      <button class="on" data-tab="poster" onclick="showPTab('poster')">Poster</button>
+      <button data-tab="insights" onclick="showPTab('insights')">Insights</button>
+      <button data-tab="faq" onclick="showPTab('faq')">FAQ</button>
+    </div>
+  </div>
+
+  <div id="tab-poster" class="ptab">
+
+    <div class="hero">
+      <svg class="squiggle" viewBox="0 0 220 50" fill="none" aria-hidden="true">
+        <path d="M2,32 L16,10 L30,44 L44,14 L58,40 L72,20 Q92,32 110,27 T142,29 T174,27 T216,29" stroke="url(#heroGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="heroGrad" x1="0" y1="0" x2="220" y2="0"><stop offset="0%" stop-color="#FA5627"/><stop offset="100%" stop-color="#FF9C40"/></linearGradient></defs>
+      </svg>
+      <h1>Your body isn't random. <span class="accent">Let's find the pattern.</span></h1>
+      <p class="subhead">See your hormones and your symptoms side by side, day by day, and get ahead of what your body's doing instead of wondering.</p>
+    </div>
+
+    <div class="problem">
+      <div class="eyebrow2">Sound familiar?</div>
+      <div class="strike-row">
+        <span class="symptom-tag"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke-linecap="round"/></svg>Unpredictable cycles</span>
+        <span class="symptom-tag"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2c2 4-2 5-2 8a2 2 0 0 0 4 0c0-1-1-1.5-1-3 2 1 3 3 3 5a4 4 0 0 1-8 0c0-4 3-6 4-10Z" stroke-linecap="round" stroke-linejoin="round"/></svg>Hot flashes</span>
+        <span class="symptom-tag"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12h1M19 12h1M12 4v1M12 19v1M6.3 6.3l.7.7M17 17l.7.7M6.3 17.7l.7-.7M17 6.3l.7-.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4"/></svg>Night sweats</span>
+        <span class="symptom-tag"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.2 1 2.6 1 4 0M9 9.5h.01M15 9.5h.01" stroke-linecap="round"/></svg>Mood swings</span>
+        <span class="symptom-tag"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4.5 14A6.5 6.5 0 0 1 11 6c1.5 0 2 1.2 1 2s-2 1.5-1 2.5S15 12 15 14a3.5 3.5 0 0 1-7 0" stroke-linecap="round" stroke-linejoin="round"/></svg>Disrupted sleep</span>
+      </div>
+    </div>
+
+    <div class="control-banner">
+      <h2>Get control of the story your body's telling you.</h2>
+      <p>Real visibility into your day-to-day symptoms and what's driving them, so you're not left guessing between doctor's visits.</p>
+    </div>
+
+    <div class="solution">
+      <div class="lead">
+        <p>Perimenopause can last years, and it rarely explains itself. A doctor's visit that ends in "your labs look normal" doesn't help either. Inito measures your actual hormones at home and pairs them with what you're feeling, so instead of guessing, you start to see your own pattern: what's likely connected, what isn't, and when it's worth a conversation with your doctor.</p>
+      </div>
+    </div>
+
+    <div class="pill-row">
+      <div class="feat-pill">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c0 0-6.5 7.6-6.5 12a6.5 6.5 0 0 0 13 0C18.5 10.6 12 3 12 3Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Measure</h4>
+        <p>Trusted at-home hormone testing, now reading the patterns of perimenopause, not just a fertile window.</p>
+      </div>
+      <div class="feat-pill">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Interpret</h4>
+        <p>Every insight is confidence-scored and shown with the evidence behind it, never a guess dressed up as certainty.</p>
+      </div>
+      <div class="feat-pill">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2" stroke-linejoin="round"/><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1Z" stroke-linejoin="round"/><path d="M9 13l2.2 2.2L15.5 11" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Manage</h4>
+        <p>One clear next step each time: keep tracking, adjust something, or bring a real summary to your doctor.</p>
+      </div>
+    </div>
+
+    <div class="mock">
+      <div class="sup">Weekly insight</div>
+      <div class="conf">Likely connected <span>&middot; moderate confidence</span></div>
+      <p class="line">Your estrogen has been more variable than usual this week, alongside more nights logged with disrupted sleep. Worth watching for another week.</p>
+    </div>
+
+    <div class="visual-strip">
+      <div class="cap">What you'll actually see</div>
+      <div class="vs-grid">
+        <div class="vs-card">
+          <svg viewBox="0 0 100 40"><polyline points="2,30 18,12 34,26 50,8 66,22 82,14 98,20" fill="none" stroke="#FA5627" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="t">Your hormone trend</div>
+          <div class="d">Plotted against your own baseline, not a generic chart</div>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 100 40"><rect x="4" y="22" width="10" height="14" rx="2" fill="#F1E7FC"/><rect x="20" y="14" width="10" height="22" rx="2" fill="#9B5CE0"/><rect x="36" y="26" width="10" height="10" rx="2" fill="#F1E7FC"/><rect x="52" y="10" width="10" height="26" rx="2" fill="#9B5CE0"/><rect x="68" y="20" width="10" height="16" rx="2" fill="#F1E7FC"/><rect x="84" y="16" width="10" height="20" rx="2" fill="#9B5CE0"/></svg>
+          <div class="t">Your symptom log</div>
+          <div class="d">A daily tap, turned into a pattern over weeks</div>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 100 40"><circle cx="50" cy="20" r="17" fill="none" stroke="#E7E3DA" stroke-width="5"/><circle cx="50" cy="20" r="17" fill="none" stroke="#FA5627" stroke-width="5" stroke-dasharray="68 107" stroke-linecap="round" transform="rotate(-90 50 20)"/></svg>
+          <div class="t">Your confidence score</div>
+          <div class="d">How confident we are in your pattern, right now</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="taglinebar">
+      <p>Inito Perimenopause pairs at-home hormone testing with daily symptom tracking to help you understand what's actually changing, not just log it.</p>
+      <span class="cta">Find your pattern</span>
+    </div>
+
+    <div class="footfine">We hold your changing hormones to the same rigor we brought to your fertile window. Never more certain than the evidence allows.</div>
+  </div>
+
+  <div id="tab-insights" class="ptab hidden">
+    <div class="insights-wrap">
+      <p class="lead-p">Short, honest reads on what's actually happening in perimenopause &mdash; written the way we'd want a friend who happens to be a hormone nerd to explain it.</p>
+      <div class="article-grid">
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--violet-soft);color:var(--violet);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 1-2-2V5Z"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></div>
+          <div class="atag">Basics</div>
+          <h4>Perimenopause, explained</h4>
+          <p>What's actually changing hormonally, how it differs from menopause itself, and why one blood test on one day rarely tells the full story.</p>
+          <div class="meta"><span>4 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>Estrogen and progesterone stop declining smoothly and start swinging instead, which is why symptoms can feel different week to week. It's a transition, not a single event, and it typically runs for years before periods stop for good.</p>
+            <div class="fact-row">
+              <span class="fact-chip">Typical length: 4&ndash;8 yrs</span>
+              <span class="fact-chip">Usually starts: 40s</span>
+              <span class="fact-chip">Ends: 12 mo after last period</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--blue-soft);color:var(--blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+          <div class="atag">Cycle</div>
+          <h4>Why your cycle is often the first thing to change</h4>
+          <p>Shorter cycles, longer cycles, or ones that skip a beat entirely &mdash; what "irregular" actually means, and when it's worth a closer look.</p>
+          <div class="meta"><span>5 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>Cycle length is often the earliest signal, before any symptom shows up. A cycle that's suddenly 10 days shorter or longer, or an occasional skipped one, usually reflects changing ovulation patterns rather than a problem on its own.</p>
+            <div class="fact-row">
+              <span class="fact-chip">Short cycle: &lt;21 days</span>
+              <span class="fact-chip">Long cycle: &gt;35 days</span>
+              <span class="fact-chip">Track cycle to cycle, not just one</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--accent-soft);color:var(--a1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 4.7 5 9.2a5 5 0 0 1-10 0c0-1 .3-1.9.9-2.7.3 1 1.1 1.8 2.1 1.9-1-2.2-.9-4.6 2-8.4Z"/></svg></div>
+          <div class="atag">Symptoms</div>
+          <h4>Hot flashes and night sweats, decoded</h4>
+          <p>The falling-estrogen mechanism behind that sudden wave of heat, and what tends to make it better or worse.</p>
+          <div class="meta"><span>3 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>As estrogen drops, the body's internal thermostat narrows its comfort zone, so small temperature shifts can trigger a flush response. Caffeine, alcohol, and stress don't cause it, but they can make episodes more frequent.</p>
+            <div class="fact-row">
+              <span class="fact-chip">Common trigger: caffeine</span>
+              <span class="fact-chip">Often worse: evening/night</span>
+              <span class="fact-chip">Usually lasts: under 5 min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--pink-soft);color:var(--pink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="17" height="10" rx="2"/><path d="M22 10.5v3"/><path d="M6 10v4"/></svg></div>
+          <div class="atag">Symptoms</div>
+          <h4>The fatigue that doesn't match your sleep</h4>
+          <p>Why exhaustion can show up before any other symptom does, and how to tell it apart from an ordinary bad week.</p>
+          <div class="meta"><span>4 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>This kind of tiredness can show up even after a full night's sleep, because fluctuating progesterone affects sleep quality, not just how many hours you get. For many people it's one of the first symptoms noticed, sometimes before any cycle change.</p>
+            <div class="fact-row">
+              <span class="fact-chip">Often an early symptom</span>
+              <span class="fact-chip">Linked to sleep quality, not hours</span>
+              <span class="fact-chip">Frequently overlaps with brain fog</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--green-soft);color:var(--green);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17a4 4 0 0 1 .3-8A5.5 5.5 0 0 1 18 10a3.5 3.5 0 0 1-1 6.9H7Z"/></svg></div>
+          <div class="atag">Symptoms</div>
+          <h4>Brain fog, joint aches, and the symptoms nobody warns you about</h4>
+          <p>The lesser-known list &mdash; and an honest answer on how confidently each one can be linked to hormones today.</p>
+          <div class="meta"><span>5 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>Word-finding trouble, achy joints, itchy or dry skin: these are real and hormonally plausible, but the evidence linking each one directly to estrogen is weaker than it is for hot flashes or sleep. We'll always say how confident we are, not just that a link exists.</p>
+            <div class="fact-row">
+              <span class="fact-chip">Evidence: association, not proof</span>
+              <span class="fact-chip">Most common: brain fog, joint aches</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="icon-badge" style="background:var(--violet-soft);color:var(--violet);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <div class="atag">Testing</div>
+          <h4>When to test, and what a "normal" result doesn't rule out</h4>
+          <p>Why a single lab visit can miss a fluctuating process, and what changes when you test over time instead.</p>
+          <div class="meta"><span>4 min read</span><button class="read" onclick="toggleArticle(this)">Read the guide &rarr;</button></div>
+          <div class="article-expand">
+            <p>Hormones fluctuate hour to hour and cycle to cycle during perimenopause, so a single lab draw can land on a "normal" day and miss the pattern entirely. Testing once a week over several months is what actually reveals a trend.</p>
+            <div class="fact-row">
+              <span class="fact-chip">One test: a single data point</span>
+              <span class="fact-chip">A pattern needs: 3+ cycles</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-faq" class="ptab hidden">
+    <div class="faq-wrap">
+      <div class="eyebrow2" style="margin-top:20px;">Common questions</div>
+      <details class="faq-item" open>
+        <summary>What is Inito Perimenopause?</summary>
+        <p>An at-home hormone test paired with a daily symptom journal. You test your urine once a week using the same reader as our fertility product, log how you're feeling, and the app shows you the pattern between the two: what's likely connected and what isn't.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Who is this for?</summary>
+        <p>Women in early to mid perimenopause who are still getting periods, even irregular ones. If your main goal is fast symptom relief, or you've already gone through menopause, this isn't the right fit yet; a doctor or hormone therapy provider will serve you better today.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What can I track?</summary>
+        <p>Hot flashes, sleep, and mood are the core three, plus optional brain fog and joint aches. Your hormone readings (estrogen, LH, FSH, and progesterone) are measured automatically every time you test.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How often do I need to test?</summary>
+        <p>Once a week, year round. We're watching for slower, longer-term patterns instead of a single fertile window.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if my results don't show a clear pattern?</summary>
+        <p>That's common. Perimenopause hormones are naturally erratic, so "not enough data yet" or "no clear link found" are honest answers you'll sometimes see, not a failure of the product.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can perimenopause start in my 30s?</summary>
+        <p>For some women, yes. Most people first notice symptoms in their mid 40s to mid 50s, but the transition can begin earlier. It typically lasts four to eight years, sometimes longer, before periods stop for good.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will this diagnose me or replace my doctor?</summary>
+        <p>No. It's an insight tool, not a diagnosis. Every insight comes with its confidence level built in, and the app builds a one page summary you can bring to an actual appointment.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use this alongside hormone therapy (HRT)?</summary>
+        <p>Not yet. Version one is built for women who aren't on hormone therapy, since HRT changes your hormone readings in ways the current pattern detection isn't tuned for. It's on our list for a future version.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need a wearable like an Apple Watch or Whoop?</summary>
+        <p>Not for version one. Everything here runs on your hormone test and your own symptom log. Pairing with a wearable for sleep and heart rate context is something we're exploring for a future version, not required today.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How is my data handled?</summary>
+        <p>Your hormone readings and symptom logs are yours. We hold this data to the same rigorous privacy and security standard across every Inito product, and it's never used to make a medical decision without you.</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script>
+window.showPTab = function(name){
+  document.querySelectorAll('.ptab').forEach(function(p){ p.classList.add('hidden'); });
+  document.getElementById('tab-' + name).classList.remove('hidden');
+  document.querySelectorAll('.tabswitch button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab') === name); });
+};
+window.toggleArticle = function(btn){
+  var card = btn.closest('.article-card');
+  var open = card.classList.toggle('expanded');
+  btn.innerHTML = open ? 'Show less' : 'Read the guide &rarr;';
+};
+</script>

@@ -1,0 +1,851 @@
+<title>Inito Perimenopause: Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-alt:#F4F2ED; --panel:#FFFFFF;
+  --ink:#1A1917; --ink-soft:#57534C; --ink-faint:#9A958C;
+  --line:#E7E3DA; --line-strong:#D2CCBF;
+  --black:#111110; --white:#FFFFFF;
+  --a1:#FA5627; --a2:#FF9C40;
+  --accent-grad:linear-gradient(100deg,var(--a1),var(--a2));
+  --accent-soft:#FFEEE4;
+  --violet:#9B5CE0; --violet-soft:#F1E7FC;
+  --orange:#E8792A; --orange-soft:#FCEADA;
+  --blue:#3E7BE0; --blue-soft:#E5EDFC;
+  --pink:#E0568C; --pink-soft:#FCE6ED;
+  --green:#3F8F5F; --green-soft:#E4F3E9;
+  --shadow:0 2px 6px rgba(20,18,15,.06), 0 14px 34px rgba(20,18,15,.10);
+  --radius:16px; --radius-sm:9px;
+  --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C0C0B; --bg-alt:#151412; --panel:#181714;
+    --ink:#F3F1EC; --ink-soft:#C3BEB3; --ink-faint:#847F75;
+    --line:#2B2925; --line-strong:#3C3934;
+    --black:#000000; --white:#FFFFFF;
+    --accent-soft:#3A2013; --violet-soft:#241A33; --orange-soft:#332215; --blue-soft:#182338; --pink-soft:#331A24; --green-soft:#16281D;
+    --shadow:0 2px 6px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C0C0B; --bg-alt:#151412; --panel:#181714;
+  --ink:#F3F1EC; --ink-soft:#C3BEB3; --ink-faint:#847F75;
+  --line:#2B2925; --line-strong:#3C3934;
+  --black:#000000; --white:#FFFFFF;
+  --accent-soft:#3A2013; --violet-soft:#241A33; --orange-soft:#332215; --blue-soft:#182338; --pink-soft:#331A24; --green-soft:#16281D;
+  --shadow:0 2px 6px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);}
+.stage{max-width:920px;margin:0 auto;padding:36px 16px 60px;}
+.stage-head{text-align:center;margin-bottom:22px;}
+.stage-head .kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--a1);font-weight:700;margin-bottom:10px;}
+.stage-head h1{font-size:1.6rem;font-weight:700;margin:0 0 8px;letter-spacing:-.01em;}
+.stage-head p{font-size:.9rem;color:var(--ink-soft);max-width:56ch;margin:0 auto;}
+.frame-wrap{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;align-items:flex-start;}
+
+.device{width:100%;max-width:360px;background:var(--black);border-radius:38px;padding:12px;box-shadow:var(--shadow);}
+.screen{background:var(--panel);border-radius:28px;overflow:hidden;height:680px;display:flex;flex-direction:column;position:relative;}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 2px;font-size:11px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
+.app-header{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 2px;}
+.app-logo{font-weight:800;font-size:1rem;letter-spacing:-.02em;}
+.demo-switch{display:flex;background:var(--bg-alt);padding:3px;border-radius:99px;}
+.demo-switch button{border:none;background:transparent;font-family:var(--sans);font-size:.66rem;font-weight:700;padding:6px 9px;border-radius:99px;cursor:pointer;color:var(--ink-soft);}
+.demo-switch button.on{background:var(--black);color:var(--white);}
+
+.tab-content{flex:1;overflow-y:auto;padding:12px 20px 8px;}
+.tab-content::-webkit-scrollbar{display:none;}
+.tab-pane.hidden{display:none;}
+.hidden{display:none!important;}
+
+.eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:700;margin-bottom:6px;}
+h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line-height:1.22;}
+.helptext{font-size:.83rem;color:var(--ink-soft);margin-bottom:14px;}
+
+/* contributor rows */
+.contrib-row{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer;}
+.contrib-row:last-child{border-bottom:none;}
+.dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;}
+.dot.ok{background:var(--green);}
+.dot.warn{background:var(--orange);}
+.dot.mute{background:var(--line-strong);}
+.contrib-row .t{flex:1;font-size:.86rem;font-weight:600;}
+.contrib-row .v{font-size:.76rem;color:var(--ink-faint);}
+.contrib-detail{font-size:.78rem;color:var(--ink-soft);padding:0 4px 10px;margin-top:-6px;display:none;}
+.contrib-detail.open{display:block;}
+
+/* insight teaser card */
+.teaser{background:var(--black);color:var(--white);border-radius:var(--radius);padding:16px 18px;margin-top:6px;}
+.teaser .sup{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:#FFB39B;font-weight:700;margin-bottom:6px;}
+.teaser p{margin:0;font-size:.88rem;line-height:1.4;}
+.teaser .go{margin-top:8px;font-size:.76rem;font-weight:700;color:var(--a2);}
+
+/* early state card */
+.learning-card{background:var(--bg-alt);border-radius:var(--radius);padding:18px;text-align:center;}
+.learning-card .prog-track{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0 8px;}
+.learning-card .prog-fill{height:100%;background:var(--accent-grad);border-radius:99px;}
+.learning-card p{margin:0;font-size:.84rem;color:var(--ink-soft);}
+.learning-card strong{display:block;font-size:.98rem;color:var(--ink);margin-bottom:2px;}
+
+/* hormone chips */
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.chip{border:1.5px solid var(--line-strong);background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:.78rem;font-weight:700;padding:8px 12px;border-radius:99px;cursor:pointer;user-select:none;}
+.chip:hover{border-color:var(--a1);}
+.chip.on{background:var(--black);border-color:var(--black);color:var(--white);}
+.hormone-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;}
+
+/* range bar (Function Health inspired) */
+.range-card{background:var(--bg-alt);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;}
+.range-card h4{margin:0 0 26px;font-size:.86rem;font-weight:700;}
+.range-track{position:relative;height:10px;border-radius:99px;background:linear-gradient(90deg,var(--blue-soft),var(--green-soft) 30%,var(--green-soft) 70%,var(--orange-soft));margin:0 4px 34px;}
+.range-marker{position:absolute;top:-7px;width:2px;height:24px;background:var(--ink);}
+.range-marker::after{content:attr(data-label);position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.62rem;font-weight:700;white-space:nowrap;color:var(--ink);text-transform:uppercase;letter-spacing:.03em;}
+.range-marker.baseline{background:var(--ink-faint);}
+.range-marker.baseline::after{content:"your baseline";color:var(--ink-faint);font-weight:600;top:22px;text-transform:none;letter-spacing:0;}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--ink-faint);margin-top:0;}
+
+/* trend bars */
+.trend-card{background:var(--bg-alt);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;}
+.trend-card h4{margin:0 0 4px;font-size:.86rem;font-weight:700;}
+.trend-card .sub{font-size:.74rem;color:var(--ink-faint);margin-bottom:10px;}
+.bars-wrap{position:relative;height:90px;margin:6px 0 4px;}
+.baseline-line{position:absolute;left:0;right:0;top:38px;border-top:1.5px dashed var(--ink-faint);}
+.baseline-line span{position:absolute;right:0;top:-16px;font-size:.62rem;color:var(--ink-faint);font-weight:600;background:var(--bg-alt);padding:0 4px;}
+.bars{display:flex;align-items:flex-end;gap:5px;height:90px;position:relative;z-index:1;}
+.bars i{flex:1;background:var(--line-strong);border-radius:3px 3px 0 0;display:block;}
+.bars i.peak{background:var(--accent-grad);}
+.conf-note{font-size:.78rem;color:var(--ink-soft);margin-top:2px;}
+.conf-pill{display:inline-block;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--a1);margin-bottom:8px;}
+
+/* journal */
+.sevrow{margin-bottom:14px;}
+.sevrow .lbl{font-size:.84rem;font-weight:700;margin-bottom:6px;}
+.sevopts{display:flex;gap:6px;}
+.sevopts .chip{flex:1;text-align:center;padding:8px 4px;font-size:.72rem;}
+.week-item{display:flex;justify-content:space-between;padding:9px 2px;border-bottom:1px solid var(--line);font-size:.8rem;}
+.week-item:last-child{border-bottom:none;}
+.week-item .d{color:var(--ink-faint);}
+
+/* summary */
+.sum-block{background:var(--bg-alt);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+.sum-block h4{margin:0 0 6px;font-size:.8rem;font-weight:700;color:var(--ink);}
+.sum-block p{margin:0;font-size:.8rem;color:var(--ink-soft);}
+.big-btn{width:100%;padding:13px;border:none;border-radius:99px;font-family:var(--sans);font-weight:700;font-size:.9rem;cursor:pointer;background:var(--black);color:var(--white);margin-top:6px;}
+
+/* tabbar */
+.tabbar{display:flex;border-top:1px solid var(--line);padding:8px 8px calc(14px);}
+.tabbtn{flex:1;background:none;border:none;font-family:var(--sans);font-size:.68rem;font-weight:700;color:var(--ink-faint);padding:8px 4px 4px;cursor:pointer;border-radius:10px;}
+.tabbtn .ic{display:block;font-size:1.05rem;margin-bottom:2px;}
+.tabbtn.on{color:var(--ink);background:var(--bg-alt);}
+
+.stage-card{background:var(--bg-alt);border-radius:var(--radius);padding:16px 18px 14px;margin-bottom:14px;}
+.stage-card .stage-kicker{display:flex;align-items:center;gap:6px;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--violet);margin-bottom:8px;}
+.stage-card .stage-kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--violet);}
+.stage-card h4{margin:0 0 14px;font-size:.96rem;font-weight:700;color:var(--ink);}
+.stage-track-wrap{position:relative;margin:0 2px 8px;padding-top:8px;}
+.stage-track{height:6px;border-radius:99px;background:var(--line);overflow:hidden;}
+.stage-track .fill{height:100%;background:var(--violet);border-radius:99px;}
+.stage-pin{position:absolute;top:0;width:14px;height:14px;border-radius:50%;background:var(--violet);border:2.5px solid var(--bg-alt);box-shadow:0 0 0 1.3px var(--violet);transform:translateX(-50%);}
+.stage-labels{display:flex;justify-content:space-between;font-size:.62rem;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin:0 2px 14px;}
+.stage-labels span.current{color:var(--violet);}
+.stage-facts{display:flex;flex-wrap:wrap;gap:7px 16px;margin-bottom:8px;}
+.stage-fact{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);}
+.stage-fact .ck{width:15px;height:15px;border-radius:50%;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;flex:0 0 auto;}
+.stage-note{font-size:.72rem;color:var(--ink-faint);margin-top:2px;line-height:1.4;}
+
+.tracker-card{background:var(--bg-alt);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;}
+.tracker-card h4{margin:0 0 2px;font-size:.86rem;font-weight:700;}
+.tracker-card .sub{font-size:.72rem;color:var(--ink-faint);margin-bottom:12px;}
+.tracker-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.tracker-row:last-child{margin-bottom:0;}
+.tracker-ic{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex:0 0 auto;}
+.tracker-main{flex:1;min-width:0;}
+.tracker-top{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:5px;}
+.tracker-label{font-weight:700;color:var(--ink);}
+.tracker-days{color:var(--ink-faint);font-weight:600;}
+.tracker-bar-track{height:6px;border-radius:99px;background:var(--line);overflow:hidden;}
+.tracker-bar-fill{height:100%;border-radius:99px;}
+
+.metric-row{display:flex;gap:10px;margin:0 0 14px;}
+.mini-stat{flex:1;background:var(--bg-alt);border-radius:14px;padding:16px 12px 14px;text-align:center;}
+.mini-stat .mv{font-size:1.55rem;font-weight:800;color:var(--ink);}
+.mini-stat .ml{font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);font-weight:700;margin-top:3px;}
+
+.more-toggle{font-size:.78rem;font-weight:700;color:var(--a1);cursor:pointer;margin:2px 0 10px;display:inline-block;background:none;border:none;font-family:var(--sans);padding:0;}
+.more-symptoms{display:none;margin:-4px 0 14px;}
+.more-symptoms.open{display:block;}
+.more-symptoms .note{font-size:.72rem;color:var(--ink-faint);margin-bottom:8px;}
+
+.showcase-head{text-align:center;margin:64px 0 26px;}
+.showcase-head h2{font-size:1.35rem;font-weight:700;margin:0 0 8px;letter-spacing:-.01em;}
+.showcase-head p{font-size:.88rem;color:var(--ink-soft);max-width:58ch;margin:0 auto;}
+.showcase-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:960px;margin:0 auto;}
+.showcase-card{width:100%;max-width:270px;text-align:left;}
+.showcase-card .device{padding:10px;border-radius:32px;margin-bottom:16px;}
+.showcase-card .screen{height:560px;border-radius:24px;padding-bottom:0;}
+.showcase-card h4{font-size:.96rem;margin:0 0 5px;font-weight:700;color:var(--ink);}
+.showcase-card p{font-size:.8rem;color:var(--ink-soft);margin:0;line-height:1.5;}
+.sc-body{padding:14px 18px 16px;flex:1;overflow-y:auto;}
+.sc-body::-webkit-scrollbar{display:none;}
+
+.sc-header{display:flex;align-items:center;padding:4px 0 12px;}
+.sc-header .back{font-size:1.2rem;color:var(--ink);width:22px;}
+.sc-header .t{font-weight:800;font-size:.94rem;flex:1;text-align:center;margin-right:22px;}
+
+.mini-toggle{display:flex;background:var(--bg-alt);padding:3px;border-radius:99px;margin-bottom:16px;}
+.mini-toggle button{flex:1;border:none;background:transparent;font-family:var(--sans);font-size:.7rem;font-weight:700;padding:7px 6px;border-radius:99px;color:var(--ink-soft);}
+.mini-toggle button.on{background:var(--black);color:var(--white);}
+
+.stage-hero{text-align:center;padding:6px 2px 0;}
+.stage-hero .ic{width:52px;height:52px;margin:4px auto 16px;color:var(--violet);display:block;}
+.stage-hero p{font-size:.88rem;color:var(--ink-soft);margin:0;}
+.stage-hero strong{display:block;font-size:1.1rem;color:var(--ink);margin-top:3px;}
+.stage-hero .stage-track-wrap{margin:22px 6px 8px;}
+.stage-hero .stage-facts{flex-direction:column;gap:9px;margin:14px 2px 16px;}
+.stage-hero .stage-disclaimer{font-size:.68rem;color:var(--ink-faint);line-height:1.45;border-top:1px solid var(--line);padding-top:12px;margin-top:4px;}
+
+.deepdive-eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);font-weight:700;margin:18px 0 8px;}
+.deepdive-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;}
+.deepdive-chip{flex:0 0 auto;display:flex;align-items:center;gap:6px;background:var(--bg-alt);border-radius:99px;padding:8px 12px;font-size:.74rem;font-weight:700;color:var(--ink);white-space:nowrap;}
+.deepdive-chip .arrow{color:var(--ink-faint);font-weight:400;}
+
+.atyp-card{background:var(--bg-alt);border-radius:var(--radius);padding:15px 15px 6px;}
+.atyp-card .hd{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.86rem;margin-bottom:14px;}
+.atyp-card .hd .warn-ic{color:var(--orange);flex:0 0 auto;}
+.atyp-year{margin-bottom:16px;}
+.atyp-year .yl{font-size:.78rem;font-weight:700;margin-bottom:1px;}
+.atyp-year .ys{font-size:.68rem;color:var(--ink-faint);margin-bottom:6px;}
+.atyp-bar{display:flex;height:20px;border-radius:6px;overflow:hidden;background:var(--line);}
+.atyp-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:.62rem;font-weight:800;}
+.atyp-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:4px 0 14px;font-size:.64rem;color:var(--ink-soft);}
+.atyp-legend span{display:inline-flex;align-items:center;gap:5px;}
+.atyp-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.atyp-note{font-size:.68rem;color:var(--ink-faint);line-height:1.4;border-top:1px solid var(--line);padding:10px 0 2px;margin-top:2px;}
+
+.legend{max-width:300px;background:var(--panel);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);font-size:.82rem;color:var(--ink-soft);}
+.legend h4{margin:0 0 10px;font-size:.9rem;color:var(--ink);}
+.legend ul{margin:0;padding-left:1.1em;}
+.legend li{margin-bottom:8px;}
+
+/* notes (Whoop-style daily journal) */
+.notes-card{background:var(--bg-alt);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px;}
+.notes-card h4{margin:0 0 2px;font-size:.86rem;font-weight:700;}
+.notes-card .nh{font-size:.76rem;color:var(--ink-faint);margin-bottom:10px;}
+.notes-textarea{width:100%;border:1.5px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--panel);color:var(--ink);font-family:var(--sans);font-size:.84rem;padding:10px 12px;resize:none;min-height:60px;box-sizing:border-box;}
+.notes-textarea:focus{outline:none;border-color:var(--a1);}
+.notes-save{margin-top:8px;border:none;background:var(--black);color:var(--white);font-family:var(--sans);font-weight:700;font-size:.76rem;padding:8px 14px;border-radius:99px;cursor:pointer;}
+.note-history{margin-top:8px;}
+.note-entry{padding:9px 2px;border-bottom:1px solid var(--line);}
+.note-entry:last-child{border-bottom:none;}
+.note-entry .nd{font-size:.66rem;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+.note-entry .nt{font-size:.8rem;color:var(--ink);line-height:1.4;}
+
+/* AI chat FAB + panel (Whoop-coach style) */
+.ai-fab{position:absolute;right:16px;bottom:80px;width:50px;height:50px;border-radius:50%;background:var(--accent-grad);border:none;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:15;color:var(--white);font-weight:800;font-size:1.15rem;font-family:var(--sans);}
+.ai-fab:active{transform:scale(.95);}
+.ai-chat-panel{position:absolute;left:0;right:0;bottom:0;top:24%;background:var(--panel);border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.18);display:flex;flex-direction:column;z-index:20;transform:translateY(105%);transition:transform .28s ease;}
+.ai-chat-panel.open{transform:translateY(0);}
+.ai-chat-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--line);}
+.ai-chat-head .t{font-weight:800;font-size:.9rem;}
+.ai-chat-head .t span{display:block;font-size:.68rem;font-weight:600;color:var(--ink-faint);margin-top:2px;}
+.ai-chat-close{background:var(--bg-alt);border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.78rem;color:var(--ink-soft);flex:0 0 auto;}
+.ai-chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:82%;padding:9px 13px;border-radius:16px;font-size:.82rem;line-height:1.42;}
+.msg.bot{background:var(--bg-alt);color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg.user{background:var(--black);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px;}
+.msg .conf-tag{display:block;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--a1);margin-bottom:3px;}
+.ai-chat-suggest{display:flex;gap:6px;padding:0 16px 10px;flex-wrap:wrap;}
+.ai-chat-suggest button{border:1.5px solid var(--line-strong);background:var(--panel);font-family:var(--sans);font-size:.72rem;font-weight:600;padding:6px 10px;border-radius:99px;cursor:pointer;color:var(--ink);}
+.ai-chat-inputrow{display:flex;gap:8px;padding:10px 14px 14px;border-top:1px solid var(--line);}
+.ai-chat-inputrow input{flex:1;min-width:0;border:1.5px solid var(--line-strong);border-radius:99px;padding:10px 14px;font-family:var(--sans);font-size:.82rem;background:var(--bg-alt);color:var(--ink);}
+.ai-chat-inputrow input:focus{outline:none;border-color:var(--a1);}
+.ai-chat-inputrow button{border:none;background:var(--black);color:var(--white);width:38px;height:38px;border-radius:50%;font-size:1rem;cursor:pointer;flex:0 0 auto;}
+</style>
+
+<div class="stage">
+  <div class="stage-head">
+    <div class="kicker">Inito &middot; Hormone Insights &amp; Personalisation</div>
+    <h1>Pattern Journal: product prototype</h1>
+    <p>Home dashboard, trends, daily check-in and doctor summary. Use the switch inside the app to compare a new user still building a baseline against an established one with enough data for a confident pattern.</p>
+  </div>
+
+  <div class="frame-wrap">
+    <div class="device">
+      <div class="screen">
+        <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+        <div class="app-header">
+          <div class="app-logo">inito</div>
+          <div class="demo-switch">
+            <button data-demo="full" class="on">8 weeks</button>
+            <button data-demo="early">New user</button>
+          </div>
+        </div>
+
+        <div class="tab-content">
+
+          <!-- HOME -->
+          <div id="tab-home" class="tab-pane">
+            <div class="eyebrow">Today</div>
+
+            <div class="stage-card" data-demo="full">
+              <div class="stage-kicker"><span class="dot"></span>Perimenopause stage</div>
+              <h4>You're likely in early perimenopause</h4>
+              <div class="stage-track-wrap">
+                <div class="stage-track"><div class="fill" style="width:22%"></div></div>
+                <div class="stage-pin" style="left:22%"></div>
+              </div>
+              <div class="stage-labels"><span class="current">Early</span><span>Mid</span><span>Late</span><span>Post</span></div>
+              <div class="stage-facts">
+                <div class="stage-fact"><span class="ck">&#10003;</span>4 symptoms logged</div>
+                <div class="stage-fact"><span class="ck">&#10003;</span>5 cycles tracked</div>
+                <div class="stage-fact"><span class="ck">&#10003;</span>Cycle length 24&ndash;34 days</div>
+              </div>
+              <div class="stage-note">Estimated from your logged patterns, using the same staging framework clinicians use. Not a diagnosis, and not a substitute for your doctor's read.</div>
+            </div>
+
+            <div class="stage-card" data-demo="early">
+              <div class="stage-kicker"><span class="dot"></span>Perimenopause stage</div>
+              <h4>Still finding your stage</h4>
+              <div class="stage-track-wrap">
+                <div class="stage-track"><div class="fill" style="width:4%;background:var(--line-strong);"></div></div>
+              </div>
+              <div class="stage-labels"><span>Early</span><span>Mid</span><span>Late</span><span>Post</span></div>
+              <div class="stage-note">We need at least 3 cycles of data before estimating where you are.</div>
+            </div>
+
+            <div class="metric-row" data-demo="full">
+              <div class="mini-stat"><div class="mv">92%</div><div class="ml">Consistency</div></div>
+              <div class="mini-stat"><div class="mv">Moderate</div><div class="ml">Symptom load</div></div>
+            </div>
+
+            <div class="eyebrow" style="margin-top:16px;">What we're seeing</div>
+            <div class="contrib-row" data-demo="full" onclick="this.nextElementSibling.classList.toggle('open')">
+              <span class="dot warn"></span><span class="t">Estrogen variability</span><span class="v">&uarr; this week</span>
+            </div>
+            <div class="contrib-detail" data-demo="full">Your estrogen readings have swung more than usual over the last 7 days, worth watching alongside your sleep log.</div>
+            <div class="contrib-row" data-demo="full" onclick="this.nextElementSibling.classList.toggle('open')">
+              <span class="dot ok"></span><span class="t">Sleep disruption</span><span class="v">4 of 7 nights</span>
+            </div>
+            <div class="contrib-detail" data-demo="full">Logged as disrupted 4 of the last 7 nights, coinciding with the estrogen swing above.</div>
+            <div class="contrib-row" data-demo="full" onclick="this.nextElementSibling.classList.toggle('open')">
+              <span class="dot mute"></span><span class="t">Check-in streak</span><span class="v">12 days</span>
+            </div>
+            <div class="contrib-detail" data-demo="full">12 days of consecutive logging. The more consistent this is, the sooner a pattern can be confirmed.</div>
+
+            <div class="contrib-row" data-demo="early">
+              <span class="dot mute"></span><span class="t">Measurements logged</span><span class="v">2 readings</span>
+            </div>
+            <div class="contrib-row" data-demo="early">
+              <span class="dot mute"></span><span class="t">Symptom logs</span><span class="v">12 days</span>
+            </div>
+
+            <div class="teaser" data-demo="full" onclick="showTab('trends')">
+              <div class="sup">Weekly insight</div>
+              <p>Your estrogen has been more variable than usual this week, alongside more nights logged with disrupted sleep. Worth watching for another week.</p>
+              <div class="go">See what this may mean &rarr;</div>
+            </div>
+
+            <div class="learning-card" data-demo="early">
+              <strong>Nothing to report yet, and that's expected</strong>
+              <p>We never guess at a pattern before we've earned the right to. Keep logging and testing on schedule.</p>
+              <div class="prog-track"><div class="prog-fill" style="width:32%"></div></div>
+              <p>Cycle 1 of ~3 needed</p>
+            </div>
+          </div>
+
+          <!-- TRENDS -->
+          <div id="tab-trends" class="tab-pane hidden">
+            <div class="eyebrow">Trends</div>
+            <h2 class="q" data-demo="full">What this may mean</h2>
+            <div class="chiprow" data-demo="full">
+              <span class="chip on" onclick="selectHormone(this,'estrogen')"><span class="hormone-dot" style="background:var(--pink)"></span>Estrogen</span>
+              <span class="chip" onclick="selectHormone(this,'lh')"><span class="hormone-dot" style="background:var(--violet)"></span>LH</span>
+              <span class="chip" onclick="selectHormone(this,'fsh')"><span class="hormone-dot" style="background:var(--orange)"></span>FSH</span>
+              <span class="chip" onclick="selectHormone(this,'pdg')"><span class="hormone-dot" style="background:var(--blue)"></span>PdG</span>
+            </div>
+
+            <div data-demo="full">
+              <div class="conf-pill" id="confPill">Association &middot; moderate</div>
+              <div class="range-card">
+                <h4 id="rangeTitle">Today's estrogen reading vs. your typical range</h4>
+                <div class="range-track">
+                  <div class="range-marker" id="rangeToday" style="left:78%" data-label="today"></div>
+                  <div class="range-marker baseline" id="rangeBaseline" style="left:45%"></div>
+                </div>
+                <div class="range-labels"><span>Low</span><span>Typical for you</span><span>High</span></div>
+              </div>
+              <div class="trend-card">
+                <h4>Last 8 weeks</h4>
+                <div class="sub" id="trendSub">Estrogen reading, relative scale</div>
+                <div class="bars-wrap">
+                  <div class="baseline-line"><span>your baseline</span></div>
+                  <div class="bars" id="trendBars">
+                    <i style="height:22%"></i><i style="height:38%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:42%"></i><i style="height:70%" class="peak"></i><i style="height:60%" class="peak"></i><i style="height:85%" class="peak"></i>
+                  </div>
+                </div>
+                <div class="conf-note" id="confNote">Shown: 3 of 5 cycles matched, not just the ones that fit.</div>
+              </div>
+
+              <div class="tracker-card">
+                <h4>Top symptoms this month</h4>
+                <div class="sub">Of 12 days logged</div>
+                <div class="tracker-row">
+                  <span class="tracker-ic" style="background:var(--pink-soft);color:var(--pink);">&#127777;</span>
+                  <div class="tracker-main">
+                    <div class="tracker-top"><span class="tracker-label">Hot flashes</span><span class="tracker-days">9 days</span></div>
+                    <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:75%;background:var(--pink);"></div></div>
+                  </div>
+                </div>
+                <div class="tracker-row">
+                  <span class="tracker-ic" style="background:var(--blue-soft);color:var(--blue);">&#127769;</span>
+                  <div class="tracker-main">
+                    <div class="tracker-top"><span class="tracker-label">Disrupted sleep</span><span class="tracker-days">7 days</span></div>
+                    <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:58%;background:var(--blue);"></div></div>
+                  </div>
+                </div>
+                <div class="tracker-row">
+                  <span class="tracker-ic" style="background:var(--violet-soft);color:var(--violet);">&#9673;</span>
+                  <div class="tracker-main">
+                    <div class="tracker-top"><span class="tracker-label">Mood swings</span><span class="tracker-days">4 days</span></div>
+                    <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:33%;background:var(--violet);"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="learning-card" data-demo="early">
+              <strong>Not enough data yet</strong>
+              <p>We need at least 3 cycles of paired hormone and symptom data before showing a trend here.</p>
+              <div class="prog-track"><div class="prog-fill" style="width:22%"></div></div>
+              <p>2 of ~9 expected readings</p>
+            </div>
+          </div>
+
+          <!-- JOURNAL -->
+          <div id="tab-journal" class="tab-pane hidden">
+            <div class="eyebrow">Today's check-in</div>
+            <h2 class="q">How are you feeling?</h2>
+            <div class="sevrow">
+              <div class="lbl">Hot flashes</div>
+              <div class="sevopts"><span class="chip on" onclick="pickSev(this)">None</span><span class="chip" onclick="pickSev(this)">Mild</span><span class="chip" onclick="pickSev(this)">Moderate</span><span class="chip" onclick="pickSev(this)">Severe</span></div>
+            </div>
+            <div class="sevrow">
+              <div class="lbl">Sleep</div>
+              <div class="sevopts"><span class="chip" onclick="pickSev(this)">Great</span><span class="chip on" onclick="pickSev(this)">Disrupted</span><span class="chip" onclick="pickSev(this)">Poor</span></div>
+            </div>
+            <div class="sevrow">
+              <div class="lbl">Mood</div>
+              <div class="sevopts"><span class="chip on" onclick="pickSev(this)">Steady</span><span class="chip" onclick="pickSev(this)">Irritable</span><span class="chip" onclick="pickSev(this)">Anxious</span></div>
+            </div>
+
+            <button class="more-toggle" type="button" onclick="toggleMore(this)">+ More symptoms</button>
+            <div class="more-symptoms" id="moreSymptoms">
+              <div class="note">Optional, for your own record. Not yet factored into pattern matching until we've validated it the way we have hot flashes, sleep and mood.</div>
+              <div class="sevrow">
+                <div class="lbl">Brain fog</div>
+                <div class="sevopts"><span class="chip on" onclick="pickSev(this)">None</span><span class="chip" onclick="pickSev(this)">Mild</span><span class="chip" onclick="pickSev(this)">Moderate</span><span class="chip" onclick="pickSev(this)">Severe</span></div>
+              </div>
+              <div class="sevrow">
+                <div class="lbl">Joint aches</div>
+                <div class="sevopts"><span class="chip on" onclick="pickSev(this)">None</span><span class="chip" onclick="pickSev(this)">Mild</span><span class="chip" onclick="pickSev(this)">Moderate</span><span class="chip" onclick="pickSev(this)">Severe</span></div>
+              </div>
+              <div class="sevrow">
+                <div class="lbl">Hair &amp; skin changes</div>
+                <div class="sevopts"><span class="chip on" onclick="pickSev(this)">None</span><span class="chip" onclick="pickSev(this)">Noticeable</span></div>
+              </div>
+            </div>
+
+            <button class="big-btn" onclick="this.textContent='Saved ✓'">Save today's log</button>
+
+            <div class="eyebrow" style="margin-top:20px;">Notes</div>
+            <div class="notes-card">
+              <h4>Anything else on your mind?</h4>
+              <div class="nh">Free text: travel, stress, a late night. Helps rule out non-hormonal explanations later.</div>
+              <textarea class="notes-textarea" id="dailyNote" placeholder="Optional&hellip;"></textarea>
+              <button class="notes-save" onclick="saveNote()">Add to today's log</button>
+              <div class="note-history" id="noteHistory">
+                <div class="note-entry"><div class="nd">Tue</div><div class="nt">Flight delayed, barely slept before it, probably not hormonal.</div></div>
+                <div class="note-entry"><div class="nd">Sun</div><div class="nt">Big work deadline this week, more wine than usual.</div></div>
+              </div>
+            </div>
+
+            <div class="eyebrow" style="margin-top:20px;">This week</div>
+            <div class="week-item"><span>Mon</span><span class="d">Sleep disrupted</span></div>
+            <div class="week-item"><span>Tue</span><span class="d">No symptoms logged</span></div>
+            <div class="week-item"><span>Wed</span><span class="d">Hot flash &middot; mild</span></div>
+            <div class="week-item"><span>Thu</span><span class="d">Sleep disrupted</span></div>
+            <div class="week-item"><span>Fri</span><span class="d">Mood: irritable</span></div>
+          </div>
+
+          <!-- SUMMARY -->
+          <div id="tab-summary" class="tab-pane hidden">
+            <div class="eyebrow">Doctor summary</div>
+            <h2 class="q">Ready to share</h2>
+            <p class="helptext">One page, exportable, editable before you send it.</p>
+
+            <div data-demo="full">
+              <div class="sum-block"><h4>Cycle overview</h4><p>5 cycles tracked &middot; increasingly irregular length (24&ndash;34 days)</p></div>
+              <div class="sum-block"><h4>Top symptoms</h4><p>Disrupted sleep (4/7 nights), hot flashes (mild&ndash;moderate), mood swings</p></div>
+              <div class="sum-block"><h4>Pattern found</h4><p>Estrogen variability has coincided with sleep disruption in 3 of your last 5 cycles (association tier, not a confirmed cause).</p></div>
+              <button class="big-btn">Share / print</button>
+            </div>
+
+            <div class="learning-card" data-demo="early">
+              <strong>Your summary will be ready soon</strong>
+              <p>Once we've learned your baseline, this page will include any patterns found. For now, it includes only your raw symptom log.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="ai-fab" id="aiFab" onclick="toggleChat(true)" aria-label="Ask about your patterns">&#10022;</button>
+
+        <div class="ai-chat-panel" id="aiChatPanel">
+          <div class="ai-chat-head">
+            <div class="t">Ask about your patterns<span>Grounded in your logged data, never a diagnosis</span></div>
+            <button class="ai-chat-close" onclick="toggleChat(false)">&#10005;</button>
+          </div>
+          <div class="ai-chat-msgs" id="aiChatMsgs">
+            <div class="msg bot"><span class="conf-tag">Association &middot; moderate</span>Your estrogen has been more variable than usual this week, alongside more nights logged with disrupted sleep. Worth watching for another week.</div>
+            <div class="msg user">Is the hot flash last night connected to that?</div>
+            <div class="msg bot">Plausibly. Hot flashes often coincide with estrogen swings like the one in your data. It's shown up in 3 of your last 5 cycles, which is why we're calling it an association, not a confirmed cause.</div>
+          </div>
+          <div class="ai-chat-suggest">
+            <button onclick="askChat('Why does this happen?')">Why does this happen?</button>
+            <button onclick="askChat('What should I do?')">What should I do?</button>
+            <button onclick="askChat('Show my doctor summary')">Show my doctor summary</button>
+          </div>
+          <div class="ai-chat-inputrow">
+            <input id="aiChatInput" type="text" placeholder="Ask about a symptom or reading&hellip;" onkeydown="if(event.key==='Enter')sendChat();">
+            <button onclick="sendChat()" aria-label="Send">&#8593;</button>
+          </div>
+        </div>
+
+        <div class="tabbar">
+          <button class="tabbtn on" data-tab="home" onclick="showTab('home')"><span class="ic">&#8962;</span>Home</button>
+          <button class="tabbtn" data-tab="trends" onclick="showTab('trends')"><span class="ic">&#8599;</span>Trends</button>
+          <button class="tabbtn" data-tab="journal" onclick="showTab('journal')"><span class="ic">&#9998;</span>Journal</button>
+          <button class="tabbtn" data-tab="summary" onclick="showTab('summary')"><span class="ic">&#128203;</span>Summary</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h4>What's demonstrated here</h4>
+      <ul>
+        <li><strong>Home</strong>: leads with the stage indicator, then two plain-language stats, Consistency and Symptom load, that only appear once there's enough data to earn them. No single composite score: each number stays traceable to something a user actually did (tested, logged), rather than an index that's hard to unpack when it moves.</li>
+        <li><strong>Stage indicator</strong>: a visual placement (inspired by Natural Cycles' staging screen) on the four broad phases of the STRAW+10 framework used in the case study's hormone section, with the facts behind it shown as plain checkmarks. It's explicitly non-diagnostic and stays a placeholder ("Still finding your stage") until there's enough cycle history to place someone.</li>
+        <li><strong>Trends</strong>: a typical-range bar and an 8-week chart plotted against your own baseline, the way a lab-results app shows where a value sits, not just a pass/fail, plus a "top symptoms this month" tracker (inspired by Natural Cycles' trackers-by-category screen) showing how often each symptom was logged. The "What this may mean" heading and the color-coded hormone selector (Estrogen/LH/FSH/PdG) only appear once there's a trend to select between; a new user sees the plain "not enough data yet" state instead, with nothing to pick from.</li>
+        <li><strong>Journal</strong>: a sub-30-second daily check-in, tap-only, plus an optional "more symptoms" section (brain fog, joint aches, hair &amp; skin) logged for personal record only until we've validated those the way we have hot flashes, sleep and mood, and a free-text notes section (Whoop-style) for context that helps rule out non-hormonal explanations.</li>
+        <li><strong>Summary</strong>: a doctor-ready export.</li>
+        <li><strong>The &#10022; button</strong>: a floating AI chat (Whoop-coach-style): tap it from anywhere to ask about a reading or symptom. Answers stay inside the evidence ladder: association language, confidence tiers, never a diagnosis.</li>
+        <li><strong>The switch</strong> at the top shows how the same screens change tone honestly for a new user who hasn't earned a confident pattern yet, instead of guessing early.</li>
+        <li><strong>The three screens below</strong> round out the flow: an early-stage estimate with its disclaimer front and center, a trackers-by-category view with deep-dive links, and a yearly "atypical cycles" history built from the same PdG/estrogen readings, not a new data source, just a longer lens on the same evidence.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="showcase-head">
+    <h2>Three more screens</h2>
+    <p>An early-stage estimate, a deeper trackers view, and year-over-year cycle-pattern history, all built from the same hormone readings and logs shown above.</p>
+  </div>
+  <div class="showcase-row">
+
+    <div class="showcase-card">
+      <div class="device">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="sc-body">
+            <div class="sc-header"><span class="back">&#8592;</span></div>
+            <div class="stage-hero">
+              <svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 14l16-6 16 6 16-6v42l-16 6-16-6-16 6V14Z"/>
+                <path d="M24 8v42M40 14v42"/>
+                <circle cx="32" cy="30" r="4.5" fill="currentColor" stroke="none"/>
+                <path d="M32 30v9"/>
+              </svg>
+              <p>Based on your logged patterns, you're likely in</p>
+              <strong>early perimenopause</strong>
+              <div class="stage-track-wrap">
+                <div class="stage-track"><div class="fill" style="width:22%"></div></div>
+                <div class="stage-pin" style="left:22%"></div>
+              </div>
+              <div class="stage-labels"><span class="current">Early</span><span>Mid</span><span>Late</span><span>Post</span></div>
+              <div class="stage-facts">
+                <div class="stage-fact"><span class="ck">&#10003;</span>4 symptoms logged</div>
+                <div class="stage-fact"><span class="ck">&#10003;</span>43 years old</div>
+                <div class="stage-fact"><span class="ck">&#10003;</span>Cycle length 24&ndash;34 days</div>
+              </div>
+              <div class="stage-disclaimer">This estimate is not a diagnosis and does not replace a consultation with your doctor.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h4>Discover your perimenopause stage</h4>
+      <p>An early estimate from your logged symptoms and cycle data, shown once you've logged enough to place you, as a range on a known clinical framework, not asserted as fact.</p>
+    </div>
+
+    <div class="showcase-card">
+      <div class="device">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="sc-body">
+            <div class="sc-header"><span class="back">&#8592;</span><span class="t">Insights</span></div>
+            <div class="mini-toggle">
+              <button>Cycle</button>
+              <button class="on">Trackers</button>
+            </div>
+            <div class="eyebrow" style="margin-bottom:2px;">Top trackers by category</div>
+            <div class="helptext" style="margin-bottom:12px;">In the past 30 days</div>
+            <div class="tracker-card" style="padding:14px 14px;">
+              <div class="tracker-row">
+                <span class="tracker-ic" style="background:var(--orange-soft);color:var(--orange);">&#127785;</span>
+                <div class="tracker-main">
+                  <div class="tracker-top"><span class="tracker-label">Brain fog</span><span class="tracker-days">logged 14 days</span></div>
+                  <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:47%;background:var(--orange);"></div></div>
+                </div>
+              </div>
+              <div class="tracker-row">
+                <span class="tracker-ic" style="background:var(--pink-soft);color:var(--pink);">&#127777;</span>
+                <div class="tracker-main">
+                  <div class="tracker-top"><span class="tracker-label">Hot flashes</span><span class="tracker-days">logged 9 days</span></div>
+                  <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:30%;background:var(--pink);"></div></div>
+                </div>
+              </div>
+              <div class="tracker-row">
+                <span class="tracker-ic" style="background:var(--green-soft);color:var(--green);">&#129704;</span>
+                <div class="tracker-main">
+                  <div class="tracker-top"><span class="tracker-label">Joint aches</span><span class="tracker-days">logged 5 days</span></div>
+                  <div class="tracker-bar-track"><div class="tracker-bar-fill" style="width:17%;background:var(--green);"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="deepdive-eyebrow">Deep dives</div>
+            <div class="deepdive-row">
+              <span class="deepdive-chip">Brain fog <span class="arrow">&rsaquo;</span></span>
+              <span class="deepdive-chip">Hot flashes <span class="arrow">&rsaquo;</span></span>
+              <span class="deepdive-chip">Sleep <span class="arrow">&rsaquo;</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h4>Navigate with confidence</h4>
+      <p>Every logged symptom rolls up into its own tracker, so it's easy to see what's showing up most before opening a deep dive.</p>
+    </div>
+
+    <div class="showcase-card">
+      <div class="device">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="sc-body">
+            <div class="sc-header"><span class="back">&#8592;</span><span class="t">Trends</span></div>
+            <div class="mini-toggle">
+              <button>Past 6 cycles</button>
+              <button class="on">Yearly trends</button>
+            </div>
+            <div class="atyp-card">
+              <div class="hd"><span class="warn-ic">&#9888;</span>Atypical cycles</div>
+
+              <div class="atyp-year">
+                <div class="yl">2024</div>
+                <div class="ys">10 cycles with 10 atypical indicators</div>
+                <div class="atyp-bar">
+                  <div class="atyp-seg" style="flex:2;background:#3E7BE0;">2</div>
+                  <div class="atyp-seg" style="flex:4;background:#5C2D91;">4</div>
+                  <div class="atyp-seg" style="flex:1;background:#AFC9F2;color:#1A1917;">1</div>
+                  <div class="atyp-seg" style="flex:1;background:#F0B429;color:#1A1917;">1</div>
+                  <div class="atyp-seg" style="flex:1;background:#F6C9D9;color:#1A1917;">1</div>
+                  <div class="atyp-seg" style="flex:1;background:#E8836B;">1</div>
+                </div>
+              </div>
+              <div class="atyp-year">
+                <div class="yl">2023</div>
+                <div class="ys">12 cycles with 5 atypical indicators</div>
+                <div class="atyp-bar">
+                  <div class="atyp-seg" style="flex:1;background:#3E7BE0;">1</div>
+                  <div class="atyp-seg" style="flex:2;background:#5C2D91;">2</div>
+                  <div class="atyp-seg" style="flex:1;background:#AFC9F2;color:#1A1917;">1</div>
+                  <div class="atyp-seg" style="flex:1;background:#E8836B;">1</div>
+                  <div class="atyp-seg" style="flex:7;background:var(--line);"></div>
+                </div>
+              </div>
+              <div class="atyp-year">
+                <div class="yl">2022</div>
+                <div class="ys">12 cycles with 0 atypical indicators</div>
+                <div class="atyp-bar">
+                  <div class="atyp-seg" style="flex:12;background:var(--line);"></div>
+                </div>
+              </div>
+
+              <div class="atyp-legend">
+                <span><i style="background:#C9A6F0;"></i>Period length</span>
+                <span><i style="background:#3E7BE0;"></i>Anovulatory cycle</span>
+                <span><i style="background:#5C2D91;"></i>Long cycle</span>
+                <span><i style="background:#AFC9F2;"></i>Short cycle</span>
+                <span><i style="background:#F0B429;"></i>Short follicular phase</span>
+                <span><i style="background:#F6C9D9;"></i>Long follicular phase</span>
+                <span><i style="background:#E8836B;"></i>Short luteal phase</span>
+              </div>
+              <div class="atyp-note">Each indicator comes from your test-day cycle length and hormone readings. Never asserted from a single cycle, and never a diagnosis on its own.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h4>Get data-driven support</h4>
+      <p>The same hormone readings used for daily insight also roll up into a year-over-year view, useful context for a doctor conversation, not a verdict on its own.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  window.showTab = function(name){
+    document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.add('hidden'); });
+    document.getElementById('tab-' + name).classList.remove('hidden');
+    document.querySelectorAll('.tabbtn').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab') === name); });
+  };
+  var HORMONE_DATA = {
+    estrogen: {
+      name: 'estrogen', color: 'var(--pink)', soft: 'var(--pink-soft)',
+      conf: 'Association &middot; moderate',
+      today: 78, baseline: 45,
+      bars: [22,38,30,55,42,70,60,85], peakFrom: 5,
+      trendSub: 'Estrogen reading, relative scale',
+      confNote: 'Shown: 3 of 5 cycles matched, not just the ones that fit.'
+    },
+    lh: {
+      name: 'LH', color: 'var(--violet)', soft: 'var(--violet-soft)',
+      conf: 'Association &middot; low',
+      today: 51, baseline: 50,
+      bars: [20,25,22,82,24,20,18,20], peakFrom: 3, peakCount: 1,
+      trendSub: 'LH reading, relative scale',
+      confNote: 'No clear surge detected in 2 of your last 5 cycles, consistent with anovulatory patterns.'
+    },
+    fsh: {
+      name: 'FSH', color: 'var(--orange)', soft: 'var(--orange-soft)',
+      conf: 'Association &middot; moderate',
+      today: 88, baseline: 60,
+      bars: [40,45,50,55,60,65,72,80], peakFrom: 6,
+      trendSub: 'FSH reading, relative scale',
+      confNote: 'Trending upward across your last 5 cycles, consistent with typical perimenopause patterns.'
+    },
+    pdg: {
+      name: 'PdG', color: 'var(--blue)', soft: 'var(--blue-soft)',
+      conf: 'Association &middot; moderate',
+      today: 30, baseline: 55,
+      bars: [65,60,58,50,45,30,28,25], peakFrom: 5,
+      trendSub: 'PdG reading, relative scale',
+      confNote: '3 of your last 5 luteal phases ran shorter than typical, consistent with reduced progesterone.'
+    }
+  };
+  function renderHormone(key){
+    var d = HORMONE_DATA[key];
+    if(!d) return;
+    var pill = document.getElementById('confPill');
+    pill.innerHTML = d.conf;
+    pill.style.background = d.soft;
+    pill.style.color = d.color;
+    document.getElementById('rangeTitle').textContent = "Today's " + d.name + " reading vs. your typical range";
+    document.getElementById('rangeToday').style.left = d.today + '%';
+    document.getElementById('rangeBaseline').style.left = d.baseline + '%';
+    document.getElementById('trendSub').textContent = d.trendSub;
+    document.getElementById('confNote').textContent = d.confNote;
+    var barsWrap = document.getElementById('trendBars');
+    barsWrap.innerHTML = '';
+    d.bars.forEach(function(h, i){
+      var bar = document.createElement('i');
+      bar.style.height = h + '%';
+      var isPeak = d.peakCount ? (i === d.peakFrom) : (i >= d.peakFrom);
+      if(isPeak) bar.style.background = d.color;
+      barsWrap.appendChild(bar);
+    });
+  }
+  window.selectHormone = function(el, key){
+    el.parentElement.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    el.classList.add('on');
+    renderHormone(key);
+  };
+  renderHormone('estrogen');
+  window.pickSev = function(el){
+    el.parentElement.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    el.classList.add('on');
+  };
+  window.toggleMore = function(btn){
+    var panel = document.getElementById('moreSymptoms');
+    var open = panel.classList.toggle('open');
+    btn.textContent = open ? 'Hide extra symptoms' : '+ More symptoms';
+  };
+  function setDemo(state){
+    document.querySelectorAll('[data-demo]').forEach(function(el){
+      if (el.classList.contains('demo-switch') || el.closest('.demo-switch')) return;
+      el.classList.toggle('hidden', el.getAttribute('data-demo') !== state);
+    });
+    document.querySelectorAll('.demo-switch button').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-demo') === state);
+    });
+  }
+  document.querySelectorAll('.demo-switch button').forEach(function(b){
+    b.addEventListener('click', function(){ setDemo(b.getAttribute('data-demo')); });
+  });
+  setDemo('full');
+
+  window.saveNote = function(){
+    var ta = document.getElementById('dailyNote');
+    var v = ta.value.trim();
+    if(!v) return;
+    var hist = document.getElementById('noteHistory');
+    var entry = document.createElement('div');
+    entry.className = 'note-entry';
+    var d = document.createElement('div'); d.className = 'nd'; d.textContent = 'Today';
+    var t = document.createElement('div'); t.className = 'nt'; t.textContent = v;
+    entry.appendChild(d); entry.appendChild(t);
+    hist.insertBefore(entry, hist.firstChild);
+    ta.value = '';
+  };
+
+  window.toggleChat = function(open){
+    document.getElementById('aiChatPanel').classList.toggle('open', open);
+  };
+
+  function addMsg(who, text){
+    var wrap = document.getElementById('aiChatMsgs');
+    var d = document.createElement('div');
+    d.className = 'msg ' + who;
+    d.textContent = text;
+    wrap.appendChild(d);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  function botReply(q){
+    q = q.toLowerCase();
+    if(q.indexOf('why') > -1) return "Falling, fluctuating estrogen narrows your body's temperature comfort zone, so small changes can trigger a hot flash or night sweat. That's an association we've seen in your data, not a certainty.";
+    if(q.indexOf('should i do') > -1 || q.indexOf('do about') > -1) return "Nothing urgent. Keep logging as you have been, a few more nights of data will tell us if this pattern holds. If it keeps disrupting sleep, that's worth mentioning at your next doctor visit.";
+    if(q.indexOf('doctor') > -1 || q.indexOf('summary') > -1) return "Opening your doctor summary: one page with your cycle overview, top symptoms, and the patterns we've found.";
+    if(q.indexOf('sleep') > -1) return "Your disrupted nights have lined up with estrogen swings in 3 of your last 5 cycles, worth watching for another week before calling it a firm pattern.";
+    return "Good question. I'll factor that into next week's insight. In the meantime, keep your check-ins going; the more consistent they are, the sooner we can say something with confidence.";
+  }
+
+  window.askChat = function(q){
+    addMsg('user', q);
+    var goToSummary = q.toLowerCase().indexOf('doctor summary') > -1;
+    setTimeout(function(){
+      addMsg('bot', botReply(q));
+      if(goToSummary){
+        setTimeout(function(){ showTab('summary'); toggleChat(false); }, 700);
+      }
+    }, 350);
+  };
+
+  window.sendChat = function(){
+    var inp = document.getElementById('aiChatInput');
+    var v = inp.value.trim();
+    if(!v) return;
+    inp.value = '';
+    askChat(v);
+  };
+})();
+</script>
