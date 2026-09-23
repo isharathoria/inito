@@ -49,6 +49,7 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
 
 .device{width:100%;max-width:360px;background:var(--black);border-radius:38px;padding:12px;box-shadow:var(--shadow);}
 .screen{background:var(--panel);border-radius:28px;overflow:hidden;height:680px;display:flex;flex-direction:column;position:relative;}
+.screen::before{content:'';position:absolute;top:9px;left:50%;transform:translateX(-50%);width:34%;max-width:90px;height:22px;background:var(--black);border-radius:14px;z-index:20;pointer-events:none;}
 .statusbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 2px;font-size:11px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 2px;}
 .app-logo{font-weight:800;font-size:1rem;letter-spacing:-.02em;}
@@ -182,12 +183,12 @@ h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line
 .showcase-head{text-align:center;margin:64px 0 26px;}
 .showcase-head h2{font-size:1.35rem;font-weight:700;margin:0 0 8px;letter-spacing:-.01em;}
 .showcase-head p{font-size:.88rem;color:var(--ink-soft);max-width:58ch;margin:0 auto;}
-.showcase-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:960px;margin:0 auto;}
-.showcase-card{width:100%;max-width:270px;text-align:left;}
-.showcase-card .device{padding:10px;border-radius:32px;margin-bottom:16px;}
-.showcase-card .screen{height:560px;border-radius:24px;padding-bottom:0;}
-.showcase-card h4{font-size:.96rem;margin:0 0 5px;font-weight:700;color:var(--ink);}
-.showcase-card p{font-size:.8rem;color:var(--ink-soft);margin:0;line-height:1.5;}
+.showcase-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:960px;margin:0 auto;}
+.showcase-card{width:100%;max-width:225px;text-align:left;}
+.showcase-card .device{padding:8px;border-radius:26px;margin-bottom:14px;}
+.showcase-card .screen{height:462px;border-radius:19px;padding-bottom:0;}
+.showcase-card h4{font-size:.88rem;margin:0 0 5px;font-weight:700;color:var(--ink);}
+.showcase-card p{font-size:.76rem;color:var(--ink-soft);margin:0;line-height:1.5;}
 .sc-body{padding:14px 18px 16px;flex:1;overflow-y:auto;}
 .sc-body::-webkit-scrollbar{display:none;}
 
@@ -270,7 +271,7 @@ h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line
   <div class="frame-wrap">
     <div class="device">
       <div class="screen">
-        <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+        <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
         <div class="app-header">
           <div class="app-logo">inito</div>
           <div class="demo-switch">
@@ -538,7 +539,7 @@ h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line
     <div class="showcase-card">
       <div class="device">
         <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
           <div class="sc-body">
             <div class="sc-header"><span class="back">&#8592;</span></div>
             <div class="stage-hero">
@@ -572,7 +573,7 @@ h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line
     <div class="showcase-card">
       <div class="device">
         <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
           <div class="sc-body">
             <div class="sc-header"><span class="back">&#8592;</span><span class="t">Insights</span></div>
             <div class="mini-toggle">
@@ -620,7 +621,7 @@ h2.q{font-size:1.15rem;font-weight:700;margin:0 0 4px;letter-spacing:-.01em;line
     <div class="showcase-card">
       <div class="device">
         <div class="screen">
-          <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+          <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
           <div class="sc-body">
             <div class="sc-header"><span class="back">&#8592;</span><span class="t">Trends</span></div>
             <div class="mini-toggle">

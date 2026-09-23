@@ -85,23 +85,19 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
 .mock .line{font-size:1.12rem;line-height:1.4;font-weight:600;margin:0;}
 
 .visual-strip{padding:34px 56px 0;}
-.visual-strip .cap{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:700;margin-bottom:14px;}
-.vs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.vs-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--panel);}
-.vs-card svg{width:100%;height:64px;display:block;margin-bottom:10px;}
-.vs-card .t{font-size:.84rem;font-weight:700;color:var(--ink);}
-.vs-card .d{font-size:.76rem;color:var(--ink-faint);margin-top:2px;}
-
-.visual-strip .cap-sub{font-size:.88rem;color:var(--ink-soft);max-width:58ch;margin:28px 0 22px;}
-.showcase-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:960px;margin:0 auto;}
-.showcase-card{width:100%;max-width:270px;text-align:left;}
-.showcase-card .device{padding:10px;border-radius:32px;margin-bottom:16px;}
-.showcase-card .screen{height:560px;border-radius:24px;padding-bottom:0;}
+.visual-strip .cap{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:700;margin-bottom:18px;}
+.showcase-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:960px;margin:0 auto;}
+.showcase-card{width:100%;max-width:225px;text-align:left;}
+.showcase-card .device{padding:8px;border-radius:26px;margin-bottom:14px;}
+.showcase-card .screen{height:462px;border-radius:19px;padding-bottom:0;}
+.showcase-card h4{font-size:.88rem;}
+.showcase-card p{font-size:.76rem;}
 .showcase-card h4{font-size:.96rem;margin:0 0 5px;font-weight:700;color:var(--ink);}
 .showcase-card p{font-size:.8rem;color:var(--ink-soft);margin:0;line-height:1.5;}
 
 .device{width:100%;max-width:360px;background:var(--black);border-radius:38px;padding:12px;box-shadow:var(--shadow);}
 .screen{background:var(--panel);border-radius:28px;overflow:hidden;height:680px;display:flex;flex-direction:column;position:relative;}
+.screen::before{content:'';position:absolute;top:9px;left:50%;transform:translateX(-50%);width:34%;max-width:90px;height:22px;background:var(--black);border-radius:14px;z-index:20;pointer-events:none;}
 .statusbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 2px;font-size:11px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
 .sc-body{padding:14px 18px 16px;flex:1;overflow-y:auto;}
 .sc-body::-webkit-scrollbar{display:none;}
@@ -201,7 +197,6 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
   .mock{margin-left:24px;margin-right:24px;}
   .control-banner{margin-left:24px;margin-right:24px;}
   .hero h1{font-size:2.4rem;}
-  .vs-grid{grid-template-columns:1fr;}
   .article-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -278,31 +273,12 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
 
     <div class="visual-strip">
       <div class="cap">What you'll actually see</div>
-      <div class="vs-grid">
-        <div class="vs-card">
-          <svg viewBox="0 0 100 40"><polyline points="2,30 18,12 34,26 50,8 66,22 82,14 98,20" fill="none" stroke="#FA5627" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div class="t">Your hormone trend</div>
-          <div class="d">Plotted against your own baseline, not a generic chart</div>
-        </div>
-        <div class="vs-card">
-          <svg viewBox="0 0 100 40"><rect x="4" y="22" width="10" height="14" rx="2" fill="#F1E7FC"/><rect x="20" y="14" width="10" height="22" rx="2" fill="#9B5CE0"/><rect x="36" y="26" width="10" height="10" rx="2" fill="#F1E7FC"/><rect x="52" y="10" width="10" height="26" rx="2" fill="#9B5CE0"/><rect x="68" y="20" width="10" height="16" rx="2" fill="#F1E7FC"/><rect x="84" y="16" width="10" height="20" rx="2" fill="#9B5CE0"/></svg>
-          <div class="t">Your symptom log</div>
-          <div class="d">A daily tap, turned into a pattern over weeks</div>
-        </div>
-        <div class="vs-card">
-          <svg viewBox="0 0 100 40"><circle cx="50" cy="20" r="17" fill="none" stroke="#E7E3DA" stroke-width="5"/><circle cx="50" cy="20" r="17" fill="none" stroke="#FA5627" stroke-width="5" stroke-dasharray="68 107" stroke-linecap="round" transform="rotate(-90 50 20)"/></svg>
-          <div class="t">Your confidence score</div>
-          <div class="d">How confident we are in your pattern, right now</div>
-        </div>
-      </div>
-
-      <p class="cap-sub">And three full screens, if you want the detail &mdash; all built from the same hormone readings and logs above.</p>
       <div class="showcase-row">
 
         <div class="showcase-card">
           <div class="device">
             <div class="screen">
-              <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+              <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
               <div class="sc-body">
                 <div class="sc-header"><span class="back">&#8592;</span></div>
                 <div class="stage-hero">
@@ -336,7 +312,7 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
         <div class="showcase-card">
           <div class="device">
             <div class="screen">
-              <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+              <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
               <div class="sc-body">
                 <div class="sc-header"><span class="back">&#8592;</span><span class="t">Insights</span></div>
                 <div class="mini-toggle">
@@ -384,7 +360,7 @@ body{margin:0;background:var(--bg-alt);color:var(--ink);font-family:var(--sans);
         <div class="showcase-card">
           <div class="device">
             <div class="screen">
-              <div class="statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+              <div class="statusbar"><span>9:41</span><span>&#128246; &#128267;</span></div>
               <div class="sc-body">
                 <div class="sc-header"><span class="back">&#8592;</span><span class="t">Trends</span></div>
                 <div class="mini-toggle">
