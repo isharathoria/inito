@@ -141,6 +141,13 @@ figcaption{font-size:.82rem;color:var(--ink-faint);margin-top:8px;max-width:70ch
 .bar-row .val{flex:0 0 48px;font-size:.78rem;font-weight:700;color:var(--ink);text-align:right;font-family:var(--mono);}
 @media (max-width:760px){.bar-row .lbl{flex-basis:118px;font-size:.72rem;}}
 
+.cycle-compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px;}
+.cycle-panel{text-align:center;}
+.cycle-panel svg{width:100%;height:auto;display:block;}
+.cp-label{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--ink);margin-top:6px;}
+.cp-note{font-size:.74rem;color:var(--ink-faint);margin-top:2px;line-height:1.4;}
+@media (max-width:640px){.cycle-compare-grid{grid-template-columns:1fr;}}
+
 .status-pill{display:inline-block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 10px;border-radius:99px;white-space:nowrap;}
 .status-pill.selected{background:var(--teal);color:#fff;}
 .status-pill.no{background:var(--panel-alt);color:var(--ink-faint);}
@@ -291,6 +298,38 @@ tr.row-selected td:first-child{border-left:3px solid var(--teal);}
       </svg>
     </figure>
     <div class="chart-foot">Individual timelines vary by years in either direction. Estrogen often holds steady or even rises before it swings and falls &mdash; a single low reading early on doesn't mean much. Those late-perimenopause swings are typically the least predictable part of the pattern &mdash; exactly why single-test snapshots struggle here.</div>
+  </div>
+
+  <div class="chart-card">
+    <h4>What one cycle actually looks like, at each stage</h4>
+    <div class="chart-sub">Illustrative shape, drawn from the within-cycle estrogen pattern reported in frequent-sampling menopausal-transition studies &mdash; not a plot of a specific woman's lab values.<sup><a href="#src26">[26]</a></sup><sup><a href="#src27">[27]</a></sup></div>
+    <div class="cycle-compare-grid">
+      <div class="cycle-panel">
+        <svg viewBox="0 0 232 150" role="img" aria-label="Premenopause: one smooth estrogen rise to a single ovulatory peak around day 13, a brief dip, a smaller luteal-phase rise, then a fall back to baseline by day 28.">
+          <line x1="20" y1="130" x2="212" y2="130" stroke="var(--line-strong)" stroke-width="1"/>
+          <polyline points="20,110 52,100 84,85 116,50 132,15 148,70 164,55 180,45 196,80 212,115" fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="cp-label">Premenopause</div>
+        <div class="cp-note">One predictable peak around ovulation, then a fall</div>
+      </div>
+      <div class="cycle-panel">
+        <svg viewBox="0 0 232 150" role="img" aria-label="Perimenopause: several unpredictable estrogen peaks and crashes across the same time window, with no consistent pattern from one stretch to the next.">
+          <line x1="20" y1="130" x2="212" y2="130" stroke="var(--line-strong)" stroke-width="1"/>
+          <polyline points="20,100 40,40 60,120 80,20 100,110 120,55 140,130 160,25 180,95 200,10 212,90" fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="cp-label">Perimenopause</div>
+        <div class="cp-note">Multiple erratic peaks &mdash; sometimes higher than a normal cycle, sometimes absent</div>
+      </div>
+      <div class="cycle-panel">
+        <svg viewBox="0 0 232 150" role="img" aria-label="Postmenopause: estrogen stays flat and low throughout, with no meaningful peaks.">
+          <line x1="20" y1="130" x2="212" y2="130" stroke="var(--line-strong)" stroke-width="1"/>
+          <polyline points="20,125 60,128 100,124 140,127 180,125 212,126" fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="cp-label">Postmenopause</div>
+        <div class="cp-note">Flat and low &mdash; the unpredictability itself resolves</div>
+      </div>
+    </div>
+    <div class="chart-foot">This is the detail the life-stage chart above compresses: perimenopause isn't a steady midpoint between "normal" and "low" &mdash; it's the stage where estrogen becomes least predictable, cycle to cycle, which is exactly the behavior a single test can't characterize.</div>
   </div>
 
   <div class="fact-grid">
@@ -464,6 +503,8 @@ tr.row-selected td:first-child{border-left:3px solid var(--teal);}
     <li id="src23">Freeman EW, Sammel MD, Lin H, Nelson DB, "Associations of hormones and menopausal status with depressed mood in women with no history of depression," Archives of General Psychiatry, 2006. <a href="https://pubmed.ncbi.nlm.nih.gov/16585466/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
     <li id="src24">Kravitz HM, Zhao X, Bromberger JT, et al., "Sleep disturbance during the menopausal transition in a multi-ethnic community sample of women," Sleep, 2008. <a href="https://pubmed.ncbi.nlm.nih.gov/18652093/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
     <li id="src25">U.S. FDA / Biogen, "FDA Approves ZURZUVAE (zuranolone), the First and Only Oral Treatment Approved for Women with Postpartum Depression," press release, Aug 4, 2023. <a href="https://investors.biogen.com/news-releases/news-release-details/fda-approves-zurzuvaetm-zuranolone-first-and-only-oral-treatment" target="_blank" rel="noopener">investors.biogen.com</a></li>
+    <li id="src26">Prior JC, "Perimenopause: The Complex Endocrinology of the Menopausal Transition," Endocrine Reviews, 1998. <a href="https://pubmed.ncbi.nlm.nih.gov/9715373/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+    <li id="src27">Burger HG, Dudley EC, Hopper JL, et al., "The endocrinology of the menopausal transition: a cross-sectional study of a population-based sample," Journal of Clinical Endocrinology &amp; Metabolism, 1995. <a href="https://pubmed.ncbi.nlm.nih.gov/8530596/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
   </ol>
 </section>
 
